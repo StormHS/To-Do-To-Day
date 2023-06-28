@@ -1,8 +1,10 @@
-export interface Fruit {
+export interface Task {
   id: number
   name: string
+  description: string
 }
 
-export interface FruitData {
+export interface TaskData {
   name: string
+  description: string
 }

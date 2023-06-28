@@ -1,33 +1,33 @@
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  MutationFunction,
-} from '@tanstack/react-query'
-import { getFruits } from '../apis/tasks'
+// import {
+//   useQuery,
+//   useMutation,
+//   useQueryClient,
+//   MutationFunction,
+// } from '@tanstack/react-query'
+// import { gettasks } from '../apis/tasks'
 
-export function useFruits() {
-  const query = useQuery(['fruits'], getFruits)
-  return {
-    ...query,
-    // Extra queries go here e.g. addFruit: useAddFruit()
-  }
-}
+// export function usetasks() {
+//   const query = useQuery(['tasks'], gettasks)
+//   return {
+//     ...query,
+//     // Extra queries go here e.g. addtask: useAddtask()
+//   }
+// }
 
-function useFruitsMutation<TData = unknown, TVariables = unknown>(
-  mutationFn: MutationFunction<TData, TVariables>
-) {
-  const queryClient = useQueryClient()
-  const mutation = useMutation(mutationFn, {
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['fruits'] })
-    },
-  })
+// function usetasksMutation<TData = unknown, TVariables = unknown>(
+//   mutationFn: MutationFunction<TData, TVariables>
+// ) {
+//   const queryClient = useQueryClient()
+//   const mutation = useMutation(mutationFn, {
+//     onSuccess: () => {
+//       queryClient.invalidateQueries({ queryKey: ['tasks'] })
+//     },
+//   })
 
-  return mutation
-}
+//   return mutation
+// }
 
-// Query functions go here e.g. useAddFruit
-/* function useAddFruit() {
-  return useFruitsMutation(addFruit)
-} */
+// // Query functions go here e.g. useAddtask
+// /* function useAddtask() {
+//   return usetasksMutation(addtask)
+// } */
