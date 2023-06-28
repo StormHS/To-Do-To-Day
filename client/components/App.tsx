@@ -1,16 +1,17 @@
-// import { usetasks } from '../hooks/useTasks'
-
+import DisplayAllTasks from "./DayTaskList"
+ 
 function App() {
-  // const { data } = usetasks()
 
-  // return (
-  //   <>
-  //     <div className="app">
-  //       <h1>Fullstack Boilerplate - with tasks!</h1>
-  //       <ul>{data && data.map((task) => <li key={task}>{task}</li>)}</ul>
-  //     </div>
-  //   </>
-  // )
+  return (
+    <>
+      <header className="header">
+        <h1>To Do, To Day!</h1>
+      </header>
+      <section>
+        <DisplayAllTasks/>
+      </section>
+    </>
+  )
 }
 
 export default App
