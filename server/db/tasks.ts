@@ -1,8 +1,6 @@
-import db from './connection'
+import connection from './connection'
 import { Task } from '../../models/task'
 
-export async function getAllTasks(): Promise<Task[]> {
-  const allTasks = await db('taskListDay').select()
-  console.log(allTasks)
-  return allTasks
+export function getAllTasks(db = connection): Promise<Task[]> {
+  return db('task').select()
 }
