@@ -12,7 +12,7 @@ function App() {
         <div>
           <img className="companion-img" src={companion} alt="Little animal" />
         </div>
-        <button>login</button>
+        <button className="login-button">login</button>
       </div>
     </>
   )

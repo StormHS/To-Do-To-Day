@@ -18,10 +18,12 @@ height: 40%;
 margin-bottom: 5%;
 }
 
-button {
+.login-button {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: larger;
+    border-radius: 20px;
     margin-left: 30%;
     margin-right: 30%;
     width: 40%;
-    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    font-size: larger;
+    border: solid rgb(149, 156, 164);
 }
