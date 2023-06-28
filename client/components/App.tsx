@@ -1,4 +1,3 @@
-import { useTasks } from '../hooks/useTasks'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
 
@@ -17,7 +16,6 @@ function App() {
     <>
       <div className="app">
         <h1>To Do To Day</h1>
-        {/* <ul>{data && data.map((task) => <li key={task}>{task}</li>)}</ul> */}
         <div>
           <img
             className="companion-img"
@@ -40,5 +38,7 @@ function App() {
     </>
   )
 }
+//client side routing via react-router
+//redirect url in auth0 
 
 export default App
