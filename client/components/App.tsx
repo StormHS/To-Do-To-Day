@@ -1,8 +1,17 @@
 import { useTasks } from '../hooks/useTasks'
-import companion from '../../images/companion.png'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import { useAuth0 } from '@auth0/auth0-react'
 
 function App() {
-  const { data } = useTasks()
+  const { user, logout, loginWithRedirect } = useAuth0()
+
+  const handleSignOut = () => {
+    logout()
+  }
+
+  const handleSignIn = () => {
+    loginWithRedirect()
+  }
 
   return (
     <>
@@ -10,9 +19,23 @@ function App() {
         <h1>To Do To Day</h1>
         {/* <ul>{data && data.map((task) => <li key={task}>{task}</li>)}</ul> */}
         <div>
-          <img className="companion-img" src={companion} alt="Little animal" />
+          <img
+            className="companion-img"
+            src="../../images/companion.png"
+            alt="Little animal"
+          />
         </div>
-        <button className="login-button">login</button>
+        <IfAuthenticated>
+          <button onClick={handleSignOut} className="login-button">
+            Sign out
+          </button>
+          {user && <p>Signed in as: {user?.nickname}</p>}
+        </IfAuthenticated>
+        <IfNotAuthenticated>
+          <button onClick={handleSignIn} className="login-button">
+            Sign in
+          </button>
+        </IfNotAuthenticated>
       </div>
     </>
   )
