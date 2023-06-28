@@ -1,13 +1,18 @@
-import { useFruits } from '../hooks/useTasks'
+import { useTasks } from '../hooks/useTasks'
+import companion from '../../images/companion.png'
 
 function App() {
-  const { data } = useFruits()
+  const { data } = useTasks()
 
   return (
     <>
       <div className="app">
-        <h1>Fullstack Boilerplate - with Fruits!</h1>
-        <ul>{data && data.map((fruit) => <li key={fruit}>{fruit}</li>)}</ul>
+        <h1>To Do To Day</h1>
+        {/* <ul>{data && data.map((task) => <li key={task}>{task}</li>)}</ul> */}
+        <div>
+          <img className="companion-img" src={companion} alt="Little animal" />
+        </div>
+        <button>login</button>
       </div>
     </>
   )

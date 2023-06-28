@@ -4,30 +4,30 @@ import {
   useQueryClient,
   MutationFunction,
 } from '@tanstack/react-query'
-import { getFruits } from '../apis/tasks'
+import { getTasks } from '../apis/tasks'
 
-export function useFruits() {
-  const query = useQuery(['fruits'], getFruits)
+export function useTasks() {
+  const query = useQuery(['tasks'], getTasks)
   return {
     ...query,
-    // Extra queries go here e.g. addFruit: useAddFruit()
+    // Extra queries go here e.g. addTask: useAddTask()
   }
 }
 
-function useFruitsMutation<TData = unknown, TVariables = unknown>(
+function useTasksMutation<TData = unknown, TVariables = unknown>(
   mutationFn: MutationFunction<TData, TVariables>
 ) {
   const queryClient = useQueryClient()
   const mutation = useMutation(mutationFn, {
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['fruits'] })
+      queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
   })
 
   return mutation
 }
 
-// Query functions go here e.g. useAddFruit
-/* function useAddFruit() {
-  return useFruitsMutation(addFruit)
+// Query functions go here e.g. useAddTask
+/* function useAddTask() {
+  return useTasksMutation(addTask)
 } */

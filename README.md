@@ -6,10 +6,10 @@
 
 This repo includes:
 
-* a single, simple API endpoint (`/api/v1/fruits`)
+* a single, simple API endpoint (`/api/v1/tasks`)
 * a single React component (`<App />`)
-* an example database module (`server/db/fruits.js`)
-* an API client module (`client/apis/fruits.js`)
+* an example database module (`server/db/tasks.js`)
+* an API client module (`client/apis/tasks.js`)
 * configuration for Vitest and testing library
 * configuration for server-side debugging in VS Code
 * configuration for preprocessing Sass
