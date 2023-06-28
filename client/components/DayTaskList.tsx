@@ -1,5 +1,7 @@
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { getTasks } from "../apis/tasks";
+import Home from "./Home";
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 export default function DisplayAllTasks() {
   const {
@@ -22,6 +24,13 @@ export default function DisplayAllTasks() {
 
   return (
     <section>
+      <IfAuthenticated>
+        <h1>To Do To Day</h1>
+        <img
+            className="companion-img"
+            src="../../images/companion.png"
+            alt="Little animal"
+          />
       {tasks.map(({ id, name, description}) => {
         return (
           <ul key={id}>
@@ -30,6 +39,10 @@ export default function DisplayAllTasks() {
           </ul>
         )
       })}
+      </IfAuthenticated>
+      <IfNotAuthenticated>
+        <Home />
+      </IfNotAuthenticated>
     </section>
   )
 }
