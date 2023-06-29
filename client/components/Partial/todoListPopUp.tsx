@@ -58,8 +58,11 @@ export default function TodoTodayListPopUp() {
   }
 
   return (
-    <Popup trigger={<button> Add Task</button>} position="right center">
-      <div style={{ backgroundColor: 'white' }}>
+    <Popup
+      trigger={<button className="add-button"> Add Task</button>}
+      position="right center"
+    >
+      <div style={{ backgroundColor: 'white', textAlign: 'center' }}>
         <div>
           <h2>Add to your to do to day list</h2>
         </div>
