@@ -3,6 +3,8 @@ import { getTasks } from '../apis/tasks'
 import Home from './Home'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import TodoTodayListPopUp from './Partial/todoListPopUp'
+import NaviBar from './Partial/navbar'
+
 export default function DisplayAllTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
 
@@ -21,6 +23,7 @@ export default function DisplayAllTasks() {
   return (
     <section>
       <IfAuthenticated>
+        <NaviBar />
         <h1>To Do To Day</h1>
         <img
           className="companion-img"

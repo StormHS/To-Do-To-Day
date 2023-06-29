@@ -7,7 +7,6 @@ export default function App() {
       <Router>
         <div>
           <Routes>
-            {/* remove path/todo and make the element of todo be the element of path / */}
             <Route path="/" element={<DayTaskList />} />
           </Routes>
         </div>
