@@ -17,6 +17,16 @@ router.get('/', async (req, res) => {
   }
 })
 
+
+// PATCH route for checkbox function
+router.patch('/:id', async (req, res) => {
+  try {
+    const taskId = Number(req.params.id)
+    const completedTaskData = req.body.completed as boolean
+    const completedTask = await db.moveCompletedTask(taskId, completedTaskData)
+    res.json(completedTask)
+  } catch (error) {
+
 // GET /api/v1/tasks/:id
 router.get('/:id', checkJwt, async (req: JwtRequest, res) => {
   const auth0Id = req.auth?.sub
@@ -64,6 +74,8 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
     res.sendStatus(500)
   }
 })
+
+
 
 // DELETE /api/v1/task
 router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
@@ -124,5 +136,6 @@ router.patch('/', checkJwt, async (req: JwtRequest, res) => {
   await db.editTasks(tasks)
   res.sendStatus(200)
 })
+
 
 export default router

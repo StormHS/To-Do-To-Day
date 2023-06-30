@@ -6,6 +6,19 @@ export function getAllTasks(db = connection): Promise<Task[]> {
   return db('taskListDay').select()
 }
 
+
+// hello!
+export async function moveCompletedTask(
+  id: number,
+  completed: boolean,
+  db = connection
+): Promise<Task> {
+  const [task] = await db('taskListDay')
+    .update({ completed: completed })
+    .where('id', id)
+    .returning('*')
+  return task
+
 export async function addTask(newTask: TaskData): Promise<Task[]> {
   return await db<Task>('taskListDay').insert(newTask).returning('*')
 }
@@ -33,4 +46,5 @@ export async function editTasks(tasks: Task[]) {
   })
   // updatePromises = [Promise, ]
   return await Promise.all(updatePromises)
+
 }

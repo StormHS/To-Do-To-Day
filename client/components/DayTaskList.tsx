@@ -1,22 +1,21 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { useState, useEffect } from 'react'
 import { editTask, getTasks } from '../apis/tasks'
-import Home from './Home'
+import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import Home from './Home'
 import TodoTodayListPopUp from './Partial/todoListPopUp'
 import NaviBar from './Partial/navbar'
-import { useState, useEffect } from 'react'
 import EditingView from './Partial/EditingView'
 import { Task } from '../../models/task'
-import { useAuth0 } from '@auth0/auth0-react'
+
 
 export default function DisplayAllTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
   const [editing, setEditing] = useState(false)
-
   const [editedTasks, setEditedTasks] = useState<Task[] | undefined>(undefined)
   const queryClient = useQueryClient()
   const { getAccessTokenSilently, isLoading: isLoadingAuth } = useAuth0()
-  console.log('isLoadingAuth', isLoadingAuth)
 
   useEffect(() => {
     if (tasks && !editedTasks) {
@@ -57,6 +56,7 @@ export default function DisplayAllTasks() {
     }
   }
 
+
   if (error) {
     if (error instanceof Error) {
       return <div>There was an error: {error.message}</div>
@@ -81,11 +81,13 @@ export default function DisplayAllTasks() {
       <IfAuthenticated>
         <NaviBar />
         <h1>To Do To Day</h1>
-        <img
-          className="companion-img"
-          src="../../images/companion.png"
-          alt="Little animal"
-        />
+         <div className="container">
+          <div className="img-container">
+            <img
+              className="imgFlex"
+              src="../../images/companion.png"
+              alt="Little animal"
+            />
         <TodoTodayListPopUp />
         <div>
           <span>
@@ -105,12 +107,17 @@ export default function DisplayAllTasks() {
                   onChange={onEditingViewChange}
                 />
               ) : (
-                <ul key={id}>
-                  <li>Task: {name}</li>
-                  <li>Notes: {description}</li>
-                </ul>
-              )}
-            </div>
+              <ul className="listFlex">
+            {tasks.map(({ id, name, description }) => {
+              return (
+                <li key={id}>
+                  <p>Task: {name}</p>
+                  <p>Notes: {description}</p>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
           )
         })}
       </IfAuthenticated>

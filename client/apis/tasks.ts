@@ -9,6 +9,17 @@ export async function getTasks(): Promise<Task[]> {
   return response.body.tasks
 }
 
+interface updateComplete {
+  id: number
+  completed: boolean
+}
+export async function updateCompletion({
+  id,
+  completed,
+}: updateComplete): Promise<Task> {
+  const response = await request.patch(`${tasksUrl}/${id}`).send({ completed })
+  return response.body
+
 export async function TaskCreate(
   Create: TaskData,
   token: string
