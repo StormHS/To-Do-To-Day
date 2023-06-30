@@ -8,3 +8,8 @@ export interface TaskData {
   name: string
   description: string
 }
+
+export interface UpdateTask {
+  token: string
+  tasks: Task[]
+}

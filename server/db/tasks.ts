@@ -24,3 +24,13 @@ export async function editTask(
 ): Promise<Task | undefined> {
   return db('taskListDay').where({ id }).update(task).returning('id')
 }
+
+export async function editTasks(tasks: Task[]) {
+  const updatePromises: unknown[] = []
+  tasks.forEach((task) => {
+    const updatePromise = db('taskListDay').where({ id: task.id }).update(task)
+    updatePromises.push(updatePromise)
+  })
+  // updatePromises = [Promise, ]
+  return await Promise.all(updatePromises)
+}

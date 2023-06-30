@@ -12,7 +12,7 @@ export default function NaviBar() {
     border: '3px solid',
     backgroundColor: 'white',
   }
-  const { user, logout, loginWithRedirect } = useAuth0()
+  const { user, logout } = useAuth0()
 
   const handleSignOut = () => {
     logout()
