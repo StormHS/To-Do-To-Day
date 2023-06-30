@@ -34,7 +34,7 @@ export default function DisplayAllTasks() {
             {tasks.map(({ id, name, description }) => {
               return (
                 <li key={id}>
-                  <h2>Task: {name}</h2>
+                  <p>Task: {name}</p>
                   <p>Notes: {description}</p>
                 </li>
               )

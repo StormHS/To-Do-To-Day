@@ -3,11 +3,12 @@
 html, 
 body {
     font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+   
 }
 
 h1 {
     text-align: center;
-    font-size: 300%;
+    font-size: 350%;
 }
 
 .companion-img-home {
@@ -41,7 +42,7 @@ margin-bottom: 5%;
     flex-direction: row;
     justify-content: center;
     margin: 0 auto;
-    max-width: 768px;
+    max-width: 1691;
 }
 
 .imgFlex {
@@ -50,7 +51,7 @@ margin-bottom: 5%;
 
 .img-container {
     flex-shrink: 0;
-    width: 250px;
+    width: 200px;
     height: 250px;
 }
 
