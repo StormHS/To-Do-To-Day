@@ -18,7 +18,7 @@ function Home() {
         <h1>To Do To Day</h1>
         <div>
           <img
-            className="companion-img"
+            className="companion-img-home"
             src="../../images/companion.png"
             alt="Little animal"
           />
@@ -39,6 +39,6 @@ function Home() {
   )
 }
 
-//redirect url in auth0 
+//redirect url in auth0
 
 export default Home

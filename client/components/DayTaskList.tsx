@@ -1,14 +1,10 @@
-import { useQuery, useMutation } from "@tanstack/react-query";
-import { getTasks } from "../apis/tasks";
-import Home from "./Home";
+import { useQuery, useMutation } from '@tanstack/react-query'
+import { getTasks } from '../apis/tasks'
+import Home from './Home'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 
 export default function DisplayAllTasks() {
-  const {
-    data: tasks,
-    error, 
-    isLoading,
-  } = useQuery(['tasks'], getTasks)
+  const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
 
   if (error) {
     if (error instanceof Error) {
@@ -18,7 +14,7 @@ export default function DisplayAllTasks() {
     }
   }
 
-  if(!tasks || isLoading) {
+  if (!tasks || isLoading) {
     return <div>Loading...</div>
   }
 
@@ -26,19 +22,25 @@ export default function DisplayAllTasks() {
     <section>
       <IfAuthenticated>
         <h1>To Do To Day</h1>
-        <img
-            className="companion-img"
-            src="../../images/companion.png"
-            alt="Little animal"
-          />
-      {tasks.map(({ id, name, description}) => {
-        return (
-          <ul key={id}>
-            <li>Task: {name}</li>
-            <li>Notes: {description}</li>
+        <div className="container">
+          <div className="img-container">
+            <img
+              className="imgFlex"
+              src="../../images/companion.png"
+              alt="Little animal"
+            />
+          </div>
+          <ul className="listFlex">
+            {tasks.map(({ id, name, description }) => {
+              return (
+                <li key={id}>
+                  <h2>Task: {name}</h2>
+                  <p>Notes: {description}</p>
+                </li>
+              )
+            })}
           </ul>
-        )
-      })}
+        </div>
       </IfAuthenticated>
       <IfNotAuthenticated>
         <Home />

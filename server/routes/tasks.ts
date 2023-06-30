@@ -14,4 +14,15 @@ router.get('/', async (req, res) => {
   }
 })
 
+router.patch('/:id', async (req, res) => {
+  try {
+    const taskId = Number(req.params.id)
+    const completedTaskData = req.body.completed as boolean
+    const completedTask = await db.moveCompletedTask(taskId, completedTaskData)
+    res.json(completedTask)
+  } catch (error) {
+    res.sendStatus(500)
+  }
+})
+
 export default router

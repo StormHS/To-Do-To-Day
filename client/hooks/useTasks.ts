@@ -14,7 +14,7 @@ export function useTasks() {
   }
 }
 
-function useTasksMutation<TData = unknown, TVariables = unknown>(
+export function useTasksMutation<TData = unknown, TVariables = unknown>(
   mutationFn: MutationFunction<TData, TVariables>
 ) {
   const queryClient = useQueryClient()
@@ -23,7 +23,7 @@ function useTasksMutation<TData = unknown, TVariables = unknown>(
       queryClient.invalidateQueries({ queryKey: ['tasks'] })
     },
   })
-
+}
 //   return mutation
 // }
 
