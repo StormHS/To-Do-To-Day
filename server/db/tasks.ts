@@ -18,6 +18,7 @@ export async function moveCompletedTask(
     .where('id', id)
     .returning('*')
   return task
+}
 
 export async function addTask(newTask: TaskData): Promise<Task[]> {
   return await db<Task>('taskListDay').insert(newTask).returning('*')

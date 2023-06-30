@@ -95,6 +95,7 @@ export default function DisplayAllTasks() {
             {editing && <button onClick={handleSave}>Save</button>}
           </span>
         </div>
+        <ul className="listFlex">
         {tasks.map(({ id, name, description }) => {
           return (
             <div key={id}>
@@ -107,23 +108,24 @@ export default function DisplayAllTasks() {
                   onChange={onEditingViewChange}
                 />
               ) : (
-              <ul className="listFlex">
-            {tasks.map(({ id, name, description }) => {
-              return (
+              
                 <li key={id}>
                   <p>Task: {name}</p>
                   <p>Notes: {description}</p>
                 </li>
-              )
-            })}
-          </ul>
-        </div>
+              
           )
-        })}
+        }</div>
+        )})}
+        </ul>
+      </div>
+      </div>
       </IfAuthenticated>
+      
       <IfNotAuthenticated>
         <Home />
       </IfNotAuthenticated>
     </section>
-  )
-}
+        )}
+  
+

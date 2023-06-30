@@ -1,6 +1,6 @@
 import express from 'express'
 import * as db from '../db//tasks'
-import { TaskData } from '../../models/task'
+import { TaskData, } from '../../models/task'
 import checkJwt, { JwtRequest } from '../auth0'
 
 const router = express.Router()
@@ -26,6 +26,10 @@ router.patch('/:id', async (req, res) => {
     const completedTask = await db.moveCompletedTask(taskId, completedTaskData)
     res.json(completedTask)
   } catch (error) {
+    console.log(error)
+    res.sendStatus(500)
+  }
+})
 
 // GET /api/v1/tasks/:id
 router.get('/:id', checkJwt, async (req: JwtRequest, res) => {
