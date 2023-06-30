@@ -1,5 +1,5 @@
 import request from 'superagent'
-import { Task, TaskData } from '../../models/task'
+import { Task, TaskData, UpdateTask } from '../../models/task'
 
 const tasksUrl = '/api/v1/tasks'
 
@@ -19,4 +19,21 @@ export async function updateCompletion({
 }: updateComplete): Promise<Task> {
   const response = await request.patch(`${tasksUrl}/${id}`).send({ completed })
   return response.body
+
+export async function TaskCreate(
+  Create: TaskData,
+  token: string
+): Promise<void> {
+  const response = await request
+    .post(tasksUrl)
+    .set('Authorization', `Bearer ${token}`)
+    .send(Create)
+  return response.body
+}
+
+export async function editTask({ token, tasks }: UpdateTask): Promise<void> {
+  await request
+    .patch(`/api/v1/tasks`)
+    .set('Authorization', `Bearer ${token}`)
+    .send({ tasks })
 }

@@ -10,3 +10,8 @@ export interface TaskData {
   description: string
   completed: boolean
 }
+
+export interface UpdateTask {
+  token: string
+  tasks: Task[]
+}

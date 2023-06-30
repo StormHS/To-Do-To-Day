@@ -1,8 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from './Home'
 import DayTaskList from './DayTaskList'
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import CompletedTasks from './CompletedTasks'
+
 
 export default function App() {
   return (
