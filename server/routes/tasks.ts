@@ -109,4 +109,20 @@ router.patch('/:id', checkJwt, async (req: JwtRequest, res) => {
   res.sendStatus(200)
 })
 
+// Edit/api/v1/tasks
+router.patch('/', checkJwt, async (req: JwtRequest, res) => {
+  const auth0Id = req.auth?.sub
+
+  if (!auth0Id) {
+    console.error('No auth0Id')
+    return res.status(401).send('Unauthorized')
+  }
+  // req.body = { tasks: [{},{},{}] }
+
+  const tasks = req.body.tasks
+
+  await db.editTasks(tasks)
+  res.sendStatus(200)
+})
+
 export default router
