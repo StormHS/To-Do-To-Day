@@ -9,7 +9,6 @@ import NaviBar from './Partial/navbar'
 import EditingView from './Partial/EditingView'
 import { Task } from '../../models/task'
 
-
 export default function DisplayAllTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
   const [editing, setEditing] = useState(false)
@@ -56,7 +55,6 @@ export default function DisplayAllTasks() {
     }
   }
 
-
   if (error) {
     if (error instanceof Error) {
       return <div>There was an error: {error.message}</div>
@@ -81,51 +79,55 @@ export default function DisplayAllTasks() {
       <IfAuthenticated>
         <NaviBar />
         <h1>To Do To Day</h1>
-         <div className="container">
+        <div className="container">
           <div className="img-container">
             <img
               className="imgFlex"
               src="../../images/companion.png"
               alt="Little animal"
             />
-        <TodoTodayListPopUp />
-        <div>
-          <span>
-            <button onClick={handleStartEditingClick}> Edit</button>
-            {editing && <button onClick={handleSave}>Save</button>}
-          </span>
+            <TodoTodayListPopUp />
+            <div>
+              <span>
+                <button
+                  className="add-edit-button"
+                  onClick={handleStartEditingClick}
+                >
+                  {' '}
+                  Edit
+                </button>
+                {editing && <button onClick={handleSave}>Save</button>}
+              </span>
+            </div>
+            <ul className="listFlex">
+              {tasks.map(({ id, name, description }) => {
+                return (
+                  <div key={id}>
+                    {editing ? (
+                      <EditingView
+                        id={id}
+                        name={name}
+                        description={description}
+                        onUpdateComplete={() => setEditing(false)}
+                        onChange={onEditingViewChange}
+                      />
+                    ) : (
+                      <li key={id}>
+                        <p>Task: {name}</p>
+                        <p>Notes: {description}</p>
+                      </li>
+                    )}
+                  </div>
+                )
+              })}
+            </ul>
+          </div>
         </div>
-        <ul className="listFlex">
-        {tasks.map(({ id, name, description }) => {
-          return (
-            <div key={id}>
-              {editing ? (
-                <EditingView
-                  id={id}
-                  name={name}
-                  description={description}
-                  onUpdateComplete={() => setEditing(false)}
-                  onChange={onEditingViewChange}
-                />
-              ) : (
-              
-                <li key={id}>
-                  <p>Task: {name}</p>
-                  <p>Notes: {description}</p>
-                </li>
-              
-          )
-        }</div>
-        )})}
-        </ul>
-      </div>
-      </div>
       </IfAuthenticated>
-      
+
       <IfNotAuthenticated>
         <Home />
       </IfNotAuthenticated>
     </section>
-        )}
-  
-
+  )
+}
