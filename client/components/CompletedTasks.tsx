@@ -35,8 +35,10 @@ export default function CompletedTasks() {
           {results.map(({ id, name, description }) => {
             return (
               <ul className="listFlex" key={id}>
-                <li>Task: {name}</li>
-                <li>Notes: {description}</li>
+                <li>
+                  <h2>Task: {name}</h2>
+                  <p>Notes: {description}</p>
+                </li>
               </ul>
             )
           })}

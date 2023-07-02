@@ -75,7 +75,7 @@ export default function AddItemPopUp() {
               className="mr-10 mt-12"
             >
               <label htmlFor="name">
-                <h3>Your To Do</h3>
+                <h3>To Do:</h3>
               </label>
               <input
                 id="name"
@@ -87,7 +87,7 @@ export default function AddItemPopUp() {
               ></input>{' '}
               <br />
               <label htmlFor="description">
-                <h3>Description of what you need to do</h3>
+                <h3>Notes:</h3>
               </label>
               <input
                 id="description"

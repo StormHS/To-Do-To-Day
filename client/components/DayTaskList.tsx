@@ -5,7 +5,6 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import TodoTodayListPopUp from './AddItemPopUp'
-import NavBar from './NavBar'
 import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
 
@@ -73,50 +72,54 @@ export default function AllTasks() {
     <section>
       <IfAuthenticated>
         <h1>To Do To Day</h1>
-        <div className="container">
-          <div className="img-container">
+        <div className="container container-list">
+          <div className="img-container img-container-list">
             <img
               className="imgFlex"
               src="../../images/companion.png"
               alt="Little animal"
             />
-            <TodoTodayListPopUp />
-            <div>
-              <span>
-                <button
-                  className="add-edit-button"
-                  onClick={handleStartEditingClick}
-                >
-                  {' '}
-                  Edit
-                </button>
-                {editing && <button onClick={handleSave}>Save</button>}
-              </span>
-            </div>
-            <ul className="listFlex">
-              {tasks.map(({ id, name, description, completed }) => {
-                return (
-                  <div key={id}>
-                    {editing ? (
-                      <EditingView
-                        id={id}
-                        name={name}
-                        description={description}
-                        completed={completed}
-                        onUpdateComplete={() => setEditing(false)}
-                        onChange={onEditingViewChange}
-                      />
-                    ) : (
-                      <li key={id}>
-                        <p>Task: {name}</p>
-                        <p>Notes: {description}</p>
-                      </li>
-                    )}
-                  </div>
-                )
-              })}
-            </ul>
           </div>
+          <TodoTodayListPopUp />
+          <div>
+            <span>
+              <button
+                className="add-edit-button"
+                onClick={handleStartEditingClick}
+              >
+                {' '}
+                Edit
+              </button>
+            </span>
+          </div>
+          <ul className="listFlex listMargin">
+            {tasks.map(({ id, name, description, completed }) => {
+              return (
+                <div key={id}>
+                  {editing ? (
+                    <EditingView
+                      id={id}
+                      name={name}
+                      description={description}
+                      completed={completed}
+                      onUpdateComplete={() => setEditing(false)}
+                      onChange={onEditingViewChange}
+                    />
+                  ) : (
+                    <li key={id}>
+                      <h2>Task: {name}</h2>
+                      <p>Notes: {description}</p>
+                    </li>
+                  )}
+                </div>
+              )
+            })}
+          </ul>
+          {editing && (
+            <button onClick={handleSave} className="save-button">
+              Save
+            </button>
+          )}
         </div>
       </IfAuthenticated>
 
