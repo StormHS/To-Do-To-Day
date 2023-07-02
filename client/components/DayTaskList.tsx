@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
-import { editTask, getTasks } from '../apis/tasks'
+import { deleteTask, editTask, getTasks } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
@@ -10,11 +10,20 @@ import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
 
 export default function AllTasks() {
-  const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
+  const { getAccessTokenSilently, isLoading: isLoadingAuth, user } = useAuth0()
+  const token = getAccessTokenSilently()
+  const {
+    data: tasks,
+    error,
+    isLoading,
+  } = useQuery(['tasks'], () => getTasks(token))
   const [editing, setEditing] = useState(false)
-  const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(undefined)
+  const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(
+    undefined
+  )
   const queryClient = useQueryClient()
-  const { getAccessTokenSilently, isLoading: isLoadingAuth } = useAuth0()
+
+  console.log(user)
 
   useEffect(() => {
     if (tasks && !editedTasks) {
@@ -53,6 +62,17 @@ export default function AllTasks() {
       })
       setEditing(false)
     }
+  }
+
+  const deleteTaskMutation = useMutation(deleteTask, {
+    onSuccess: async () => {
+      queryClient.invalidateQueries(['tasks'])
+    },
+  })
+
+  const handleDeleteClick = async (id: number) => {
+    const token = await getAccessTokenSilently()
+    deleteTaskMutation.mutate({ id, token })
   }
 
   if (error) {
@@ -96,6 +116,9 @@ export default function AllTasks() {
               {tasks.map(({ id, name, description, completed }) => {
                 return (
                   <div key={id}>
+                    <button onClick={() => handleDeleteClick(id)}>
+                      Delete
+                    </button>
                     {editing ? (
                       <EditingView
                         id={id}

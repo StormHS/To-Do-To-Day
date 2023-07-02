@@ -1,14 +1,19 @@
 import express from 'express'
 import * as db from '../db//tasks'
-import { TaskData, } from '../../models/task'
+import { TaskData } from '../../models/task'
 import checkJwt, { JwtRequest } from '../auth0'
 
 const router = express.Router()
 
 // GET /api/v1/tasks
-router.get('/', async (req, res) => {
+router.get('/', checkJwt, async (req: JwtRequest, res) => {
+  const auth0Id = req.auth?.sub
+  if (!auth0Id) {
+    console.error('No auth0Id')
+    return res.status(401).send('Unauthorized')
+  }
   try {
-    const tasks = await db.getAllTasks()
+    const tasks = await db.getAllTasks(auth0Id)
 
     res.json({ tasks })
   } catch (error) {
@@ -16,7 +21,6 @@ router.get('/', async (req, res) => {
     res.status(500).json({ message: 'Something went wrong' })
   }
 })
-
 
 // PATCH route for checkbox function
 router.patch('/:id', async (req, res) => {
@@ -79,8 +83,6 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
 })
 
-
-
 // DELETE /api/v1/task
 router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
   const auth0Id = req.auth?.sub
@@ -140,6 +142,5 @@ router.patch('/', checkJwt, async (req: JwtRequest, res) => {
   await db.editTasks(tasks)
   res.sendStatus(200)
 })
-
 
 export default router

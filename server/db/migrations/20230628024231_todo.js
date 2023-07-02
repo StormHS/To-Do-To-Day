@@ -4,6 +4,7 @@ exports.up = (knex) => {
     table.string('name')
     table.string('description')
     table.boolean('completed')
+    table.string('auth0id')
   })
 }
 
