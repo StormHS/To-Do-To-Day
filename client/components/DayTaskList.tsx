@@ -108,7 +108,7 @@ export default function AllTasks() {
                       />
                     ) : (
                       <li key={id}>
-                        <p>TaskRecord: {name}</p>
+                        <p>Task: {name}</p>
                         <p>Notes: {description}</p>
                       </li>
                     )}
