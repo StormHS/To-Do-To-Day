@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Popup from 'reactjs-popup'
-
 import { TaskData } from '../../models/task'
 import { TaskCreate } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
