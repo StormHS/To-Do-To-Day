@@ -12,7 +12,9 @@ import { TaskRecord } from '../../models/task'
 export default function AllTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
   const [editing, setEditing] = useState(false)
-  const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(undefined)
+  const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(
+    undefined
+  )
   const queryClient = useQueryClient()
   const { getAccessTokenSilently, isLoading: isLoadingAuth } = useAuth0()
 
@@ -70,7 +72,6 @@ export default function AllTasks() {
   return (
     <section>
       <IfAuthenticated>
-        <NavBar />
         <h1>To Do To Day</h1>
         <div className="container">
           <div className="img-container">

@@ -1,5 +1,6 @@
 import { getTasks } from '../apis/tasks'
 import { useQuery } from '@tanstack/react-query'
+import NavBar from './NavBar'
 
 export default function CompletedTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
@@ -18,7 +19,7 @@ export default function CompletedTasks() {
   const results = tasks.filter((task) => task.completed)
 
   // todo: if authenticated
-  
+
   return (
     <section>
       <div>
