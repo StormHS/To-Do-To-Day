@@ -71,8 +71,8 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
       res.sendStatus(400)
       return
     }
-    const Task = await db.addTask(newTask)
-    res.json({ Task })
+    const TaskRecord = await db.addTask(newTask)
+    res.json({ TaskRecord })
   } catch (error) {
     console.error(error)
     res.sendStatus(500)
@@ -101,7 +101,7 @@ router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
     res.sendStatus(200)
   } catch (error) {
     console.log(error)
-    res.status(500).send('could not delete Task')
+    res.status(500).send('could not delete TaskRecord')
   }
 })
 

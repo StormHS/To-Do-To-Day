@@ -1,12 +1,8 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
-import { TaskData } from '../../models/task'
 import { getTasks } from '../apis/tasks'
 import { useQuery } from '@tanstack/react-query'
 
 export default function CompletedTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
-  console.log()
 
   if (error) {
     if (error instanceof Error) {
@@ -21,9 +17,10 @@ export default function CompletedTasks() {
   }
   const results = tasks.filter((task) => task.completed)
 
+  // todo: if authenticated
+  
   return (
     <section>
-      {/* <IfAuthenticated> */}
       <div>
         <h1>What You Did Today</h1>
         <div className="container">
@@ -44,7 +41,6 @@ export default function CompletedTasks() {
           })}
         </div>
       </div>
-      {/* </IfAuthenticated> */}
     </section>
   )
 }

@@ -4,15 +4,15 @@ import { editTask, getTasks } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
-import TodoTodayListPopUp from './Partial/todoListPopUp'
-import NaviBar from './Partial/navbar'
-import EditingView from './Partial/EditingView'
-import { Task } from '../../models/task'
+import TodoTodayListPopUp from './AddItemPopUp'
+import NavBar from './NavBar'
+import EditingView from './EditingView'
+import { TaskRecord } from '../../models/task'
 
-export default function DisplayAllTasks() {
+export default function AllTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
   const [editing, setEditing] = useState(false)
-  const [editedTasks, setEditedTasks] = useState<Task[] | undefined>(undefined)
+  const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(undefined)
   const queryClient = useQueryClient()
   const { getAccessTokenSilently, isLoading: isLoadingAuth } = useAuth0()
 
@@ -20,13 +20,13 @@ export default function DisplayAllTasks() {
     if (tasks && !editedTasks) {
       setEditedTasks(tasks)
     }
-  }, [tasks])
+  }, [tasks, editedTasks])
 
   const handleStartEditingClick = () => {
     setEditing(true)
   }
 
-  const onEditingViewChange = (task: Task) => {
+  const onEditingViewChange = (task: TaskRecord) => {
     const updatedEditedTasks = editedTasks?.map((editedTask) => {
       if (editedTask.id === task.id) {
         return task
@@ -63,21 +63,14 @@ export default function DisplayAllTasks() {
     }
   }
 
-  if (!tasks || isLoading) {
+  if (!tasks || isLoading || isLoadingAuth) {
     return <div>Loading...</div>
   }
-  if (isLoadingAuth) {
-    return <div>Loading...</div>
-  }
-
-  // Create a editedTasksArray (purpose is to store all the edited versions of the tasks)
-  // change the EditingView component to update our editedTasks array
-  // move the editTask(s)Mutation to this component (move the handleSave into this component)
 
   return (
     <section>
       <IfAuthenticated>
-        <NaviBar />
+        <NavBar />
         <h1>To Do To Day</h1>
         <div className="container">
           <div className="img-container">
@@ -100,7 +93,7 @@ export default function DisplayAllTasks() {
               </span>
             </div>
             <ul className="listFlex">
-              {tasks.map(({ id, name, description }) => {
+              {tasks.map(({ id, name, description, completed }) => {
                 return (
                   <div key={id}>
                     {editing ? (
@@ -108,12 +101,13 @@ export default function DisplayAllTasks() {
                         id={id}
                         name={name}
                         description={description}
+                        completed={completed}
                         onUpdateComplete={() => setEditing(false)}
                         onChange={onEditingViewChange}
                       />
                     ) : (
                       <li key={id}>
-                        <p>Task: {name}</p>
+                        <p>TaskRecord: {name}</p>
                         <p>Notes: {description}</p>
                       </li>
                     )}

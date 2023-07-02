@@ -1,13 +1,12 @@
-import React, { ChangeEvent, useState } from 'react'
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
-import { editTask } from '../../apis/tasks'
-import { Task } from '../../../models/task'
+import { ChangeEvent, useState } from 'react'
+import { TaskRecord } from '../../models/task'
 
 interface Props {
-  name: string
   id: number
+  name: string
   description: string
-  onChange: (task: Task) => void
+  completed: boolean
+  onChange: (task: TaskRecord) => void
   onUpdateComplete: () => void
 }
 
@@ -15,12 +14,10 @@ export default function EditingView({
   id,
   name,
   description,
+  completed,
   onChange,
-  onUpdateComplete,
 }: Props) {
-  const [form, setForm] = useState({ id, name, description })
-
-  const queryClient = useQueryClient()
+  const [form, setForm] = useState<TaskRecord>({ id, name, description, completed })
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target
@@ -28,6 +25,7 @@ export default function EditingView({
     setForm(newTask)
     onChange(newTask)
   }
+  
   return (
     <div>
       <ul key={id}>
