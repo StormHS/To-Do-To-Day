@@ -70,7 +70,7 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
 
   try {
-    const newTask = req.body as TaskData
+    const newTask = { ...req.body, auth0id: auth0Id } as TaskData
     if (!newTask) {
       res.sendStatus(400)
       return
@@ -99,7 +99,7 @@ router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
   }
 
   try {
-    await db.deleteTask(id)
+    await db.deleteTask(id, auth0Id)
     res.sendStatus(200)
   } catch (error) {
     console.log(error)

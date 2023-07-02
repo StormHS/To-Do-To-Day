@@ -10,20 +10,17 @@ import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
 
 export default function AllTasks() {
-  const { getAccessTokenSilently, isLoading: isLoadingAuth, user } = useAuth0()
-  const token = getAccessTokenSilently()
+  const auth = useAuth0()
   const {
     data: tasks,
     error,
     isLoading,
-  } = useQuery(['tasks'], () => getTasks(token))
+  } = useQuery(['tasks'], () => getTasks(auth))
   const [editing, setEditing] = useState(false)
   const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(
     undefined
   )
   const queryClient = useQueryClient()
-
-  console.log(user)
 
   useEffect(() => {
     if (tasks && !editedTasks) {
@@ -54,7 +51,7 @@ export default function AllTasks() {
 
   const handleSave = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    const token = await getAccessTokenSilently()
+    const token = await auth.getAccessTokenSilently()
     if (editedTasks) {
       editViewMutation.mutate({
         token,
@@ -71,7 +68,7 @@ export default function AllTasks() {
   })
 
   const handleDeleteClick = async (id: number) => {
-    const token = await getAccessTokenSilently()
+    const token = await auth.getAccessTokenSilently()
     deleteTaskMutation.mutate({ id, token })
   }
 
@@ -83,7 +80,7 @@ export default function AllTasks() {
     }
   }
 
-  if (!tasks || isLoading || isLoadingAuth) {
+  if (!tasks || isLoading || auth.isLoading) {
     return <div>Loading...</div>
   }
 

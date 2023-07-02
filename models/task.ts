@@ -3,6 +3,7 @@ export interface TaskRecord {
   name: string
   description: string
   completed: boolean
+  auth0id: string
 }
 
 export type TaskData = Omit<TaskRecord, 'id'>

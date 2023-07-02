@@ -19,7 +19,7 @@ exports.seed = async function (knex) {
       name: 'clean car',
       description: 'car is dirty',
       completed: false,
-      auth0id: 'google-oauth2|104154911859064202724',
+      auth0id: '2',
     },
     {
       id: 3,
