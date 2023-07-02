@@ -1,29 +1,30 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Popup from 'reactjs-popup'
-
-import { TaskData } from '../../../models/task'
-import { TaskCreate } from '../../apis/tasks'
+import { TaskData } from '../../models/task'
+import { TaskCreate } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const initialFormData: TaskData = {
   name: '',
   description: '',
+  completed: false,
 }
-interface CreateVariables {
+
+interface CreateTaskArgs {
   token: string
   task: TaskData
 }
 
-async function createTask(variables: CreateVariables) {
-  return TaskCreate(variables.task, variables.token)
+async function createTask(args: CreateTaskArgs) {
+  return TaskCreate(args.task, args.token)
 }
 
-export default function TodoTodayListPopUp() {
+export default function AddItemPopUp() {
   const [form, setForm] = useState<TaskData>(initialFormData)
   const queryClient = useQueryClient()
   const { getAccessTokenSilently } = useAuth0()
-  const TaskCreateMutation = useMutation<void, unknown, CreateVariables>(
+  const TaskCreateMutation = useMutation<void, unknown, CreateTaskArgs>(
     createTask,
     {
       onSuccess: async () => {

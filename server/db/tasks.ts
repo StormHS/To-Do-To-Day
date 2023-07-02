@@ -1,8 +1,8 @@
 import connection from './connection'
-import { Task, TaskData } from '../../models/task'
+import { TaskRecord, TaskData } from '../../models/task'
 import db from './connection'
 
-export function getAllTasks(db = connection): Promise<Task[]> {
+export function getAllTasks(db = connection): Promise<TaskRecord[]> {
   return db('taskListDay').select()
 }
 
@@ -12,7 +12,7 @@ export async function moveCompletedTask(
   id: number,
   completed: boolean,
   db = connection
-): Promise<Task> {
+): Promise<TaskRecord> {
   const [task] = await db('taskListDay')
     .update({ completed: completed })
     .where('id', id)
@@ -20,11 +20,11 @@ export async function moveCompletedTask(
   return task
 }
 
-export async function addTask(newTask: TaskData): Promise<Task[]> {
-  return await db<Task>('taskListDay').insert(newTask).returning('*')
+export async function addTask(newTask: TaskData): Promise<TaskRecord[]> {
+  return await db<TaskRecord>('taskListDay').insert(newTask).returning('*')
 }
 
-export async function getTaskById(id: number): Promise<Task> {
+export async function getTaskById(id: number): Promise<TaskRecord> {
   return await db('taskListDay').where('id', id).select('*').first()
 }
 
@@ -33,15 +33,16 @@ export async function deleteTask(id: number): Promise<void> {
 }
 
 export async function editTask(
-  task: Task,
+  task: TaskRecord,
   id: number
-): Promise<Task | undefined> {
+): Promise<TaskRecord | undefined> {
   return db('taskListDay').where({ id }).update(task).returning('id')
 }
 
-export async function editTasks(tasks: Task[]) {
+export async function editTasks(tasks: TaskRecord[]) {
   const updatePromises: unknown[] = []
   tasks.forEach((task) => {
+    console.log({task})
     const updatePromise = db('taskListDay').where({ id: task.id }).update(task)
     updatePromises.push(updatePromise)
   })
