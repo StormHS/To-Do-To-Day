@@ -1,7 +1,8 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import DayTaskList from './DayTaskList'
 import CompletedTasks from './CompletedTasks'
-import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
+import NavBar from './NavBar'      
 import Home from './Home'
 
 export default function App() {
@@ -11,6 +12,7 @@ export default function App() {
         <Home />
       </IfNotAuthenticated>
       <Router>
+        <NavBar />
         <div>
           <IfAuthenticated>
             <Routes>

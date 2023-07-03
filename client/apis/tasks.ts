@@ -4,15 +4,14 @@ import { Auth0ContextInterface, User } from '@auth0/auth0-react'
 
 const tasksUrl = '/api/v1/tasks'
 
+
 export async function getTasks(
   auth: Auth0ContextInterface<User>
 ): Promise<TaskRecord[]> {
   const token = await auth.getAccessTokenSilently()
-  console.log(token)
   const response = await request
     .get(tasksUrl)
     .set('Authorization', `Bearer ${token}`)
-  console.log(response.body)
   return response.body.tasks
 }
 
