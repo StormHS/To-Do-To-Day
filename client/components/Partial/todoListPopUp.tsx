@@ -1,30 +1,29 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Popup from 'reactjs-popup'
-import { TaskData } from '../../models/task'
-import { TaskCreate } from '../apis/tasks'
+
+import { TaskData } from '../../../models/task'
+import { TaskCreate } from '../../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const initialFormData: TaskData = {
   name: '',
   description: '',
-  completed: false,
 }
-
-interface CreateTaskArgs {
+interface CreateVariables {
   token: string
   task: TaskData
 }
 
-async function createTask(args: CreateTaskArgs) {
-  return TaskCreate(args.task, args.token)
+async function createTask(variables: CreateVariables) {
+  return TaskCreate(variables.task, variables.token)
 }
 
-export default function AddItemPopUp() {
+export default function TodoTodayListPopUp() {
   const [form, setForm] = useState<TaskData>(initialFormData)
   const queryClient = useQueryClient()
   const { getAccessTokenSilently } = useAuth0()
-  const TaskCreateMutation = useMutation<void, unknown, CreateTaskArgs>(
+  const TaskCreateMutation = useMutation<void, unknown, CreateVariables>(
     createTask,
     {
       onSuccess: async () => {
@@ -60,7 +59,7 @@ export default function AddItemPopUp() {
 
   return (
     <Popup
-      trigger={<button className="add-edit-button">+</button>}
+      trigger={<button className="add-button"> Add Task</button>}
       position="right center"
     >
       <div style={{ backgroundColor: 'white', textAlign: 'center' }}>
@@ -75,7 +74,7 @@ export default function AddItemPopUp() {
               className="mr-10 mt-12"
             >
               <label htmlFor="name">
-                <h3>To Do:</h3>
+                <h3>Your To Do</h3>
               </label>
               <input
                 id="name"
@@ -87,7 +86,7 @@ export default function AddItemPopUp() {
               ></input>{' '}
               <br />
               <label htmlFor="description">
-                <h3>Notes:</h3>
+                <h3>Description of what you need to do</h3>
               </label>
               <input
                 id="description"

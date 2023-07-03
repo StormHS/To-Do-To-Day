@@ -1,5 +1,6 @@
 import { IfAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
+import { Link } from 'react-router-dom'
 
 export default function NavBar() {
   const { logout } = useAuth0()
@@ -11,29 +12,26 @@ export default function NavBar() {
   return (
     <div className="nav-bar">
       <table>
-        <tbody>
-          <tr>
+        <tr>
+          <IfAuthenticated>
             <th>
-              <a className="nav-bar-buttons" href="/">
+              <Link className="nav-bar-buttons" href="/">
                 To Do
-              </a>
+              </Link>
             </th>
             <th>
-              <a className="nav-bar-buttons" href="/completed">
+              <Link className="nav-bar-buttons" to="/completed">
                 Done
-              </a>
+              </Link>
             </th>
             <th>
-              {' '}
-              <IfAuthenticated>
-                <button onClick={handleSignOut} className="sign-out-button">
-                  Sign out
-                </button>
-                {/* {user && <p>Signed in as: {user?.nickname}</p>} */}
-              </IfAuthenticated>
+              <button onClick={handleSignOut} className="sign-out-button">
+                Sign out
+              </button>
+              {/* {user && <p>Signed in as: {user?.nickname}</p>} */}
             </th>
-          </tr>
-        </tbody>
+          </IfAuthenticated>
+        </tr>
       </table>
     </div>
   )

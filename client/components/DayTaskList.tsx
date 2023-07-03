@@ -5,14 +5,15 @@ import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import TodoTodayListPopUp from './AddItemPopUp'
-import NavBar from './NavBar'
 import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
 
 export default function AllTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
   const [editing, setEditing] = useState(false)
-  const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(undefined)
+  const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(
+    undefined
+  )
   const queryClient = useQueryClient()
   const { getAccessTokenSilently, isLoading: isLoadingAuth } = useAuth0()
 
@@ -100,60 +101,63 @@ export default function AllTasks() {
   return (
     <section>
       <IfAuthenticated>
-        <NavBar />
         <h1>To Do To Day</h1>
-        <div className="container">
-          <div className="img-container">
+        <div className="container container-list">
+          <div className="img-container img-container-list">
             <img
               className="imgFlex"
               src="../../images/companion.png"
               alt="Little animal"
             />
-            <TodoTodayListPopUp />
-            <div>
-              <span>
-                <button
-                  className="add-edit-button"
-                  onClick={handleStartEditingClick}
-                >
-                  {' '}
-                  Edit
-                </button>
-                {editing && <button onClick={handleSave}>Save</button>}
-              </span>
-            </div>
-            <ul className="listFlex">
-              {incompleteTasks.map(({ id, name, description, completed }) => {
-                return (
-                  <div key={id}>
-                    {editing ? (
-                      <EditingView
-                        id={id}
-                        name={name}
-                        description={description}
-                        completed={completed}
-                        onUpdateComplete={() => setEditing(false)}
-                        onChange={onEditingViewChange}
-                      />
-                    ) : (
-                      <li key={id} style={{ listStyleType: 'none'}}>
-                        <label style={{ display: 'flex', alignItems: 'center'}}>
-                          <input 
-                            type="checkbox"
-                            style={{ marginRight: '0.5rem'}}
-                            checked={completed}
-                            onChange={() => handleTaskComlpete(id)}
-                          />
-                          </label>
-                        <p>TaskRecord: {name}</p>
-                        <p>Notes: {description}</p>
-                      </li>
-                    )}
-                  </div>
-                )
-              })}
-            </ul>
           </div>
+          <TodoTodayListPopUp />
+          <div>
+            <span>
+              <button
+                className="add-edit-button"
+                onClick={handleStartEditingClick}
+              >
+                {' '}
+                Edit
+              </button>
+            </span>
+          </div>
+          <ul className="listFlex listMargin">
+            {incompleteTasks.map(({ id, name, description, completed }) => {
+              return (
+                <div key={id}>
+                  {editing ? (
+                    <EditingView
+                      id={id}
+                      name={name}
+                      description={description}
+                      completed={completed}
+                      onUpdateComplete={() => setEditing(false)}
+                      onChange={onEditingViewChange}
+                    />
+                  ) : (
+                    <li key={id} style={{ listStyleType: 'none'}}>
+                     <label style={{ display: 'flex', alignItems: 'center'}}>
+                        <input 
+                         type="checkbox"
+                         style={{ marginRight: '0.5rem'}}
+                         checked={completed}
+                         onChange={() => handleTaskComlpete(id)}
+                        />
+                       </label>
+                      <h2>Task: {name}</h2>
+                      <p>Notes: {description}</p>
+                    </li>
+                  )}
+                </div>
+              )
+            })}
+          </ul>
+          {editing && (
+            <button onClick={handleSave} className="save-button">
+              Save
+            </button>
+          )}
         </div>
       </IfAuthenticated>
       <IfNotAuthenticated>

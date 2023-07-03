@@ -1,10 +1,11 @@
+
 import { getTasks, updateCompletion } from '../apis/tasks'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { TaskRecord } from '../../models/task'
-import NavBar from './NavBar'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import NavBar from './NavBar'
 
 export default function CompletedTasks() {
   const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
@@ -60,7 +61,7 @@ export default function CompletedTasks() {
   const results = tasks.filter((task) => task.completed)
 
   // todo: if authenticated
-  
+
   return (
     <section>
       <div>
@@ -74,6 +75,7 @@ export default function CompletedTasks() {
               alt="Little animal"
             />
           </div>
+
           <ul className="listFlex">
             {results.map(({ id, name, description, completed }) => {
               return (
@@ -88,13 +90,12 @@ export default function CompletedTasks() {
                     <FontAwesomeIcon icon={faUndo} style={over ? { color: "red" } : {}} />
                   <input 
                     type="checkbox"
-                  
                     style={{ marginRight: '0.5rem', visibility: "hidden"}}
                     checked={completed}
                     onChange={() => handleTaskComlpete(id)}
                   />
                 </label>
-                <p>TaskRecord: {name}</p>
+                <h2>Task: {name}</h2>
                 <p>Notes: {description}</p>
               </li>
               )
