@@ -1,12 +1,13 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
-import { editTask, getTasks, updateCompletion,  deleteTask } from '../apis/tasks'
+import { editTask, getTasks, updateCompletion, deleteTask } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import TodoTodayListPopUp from './AddItemPopUp'
 import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
+import Popup from 'reactjs-popup'
 
 export default function AllTasks() {
   const auth = useAuth0()
@@ -57,12 +58,12 @@ export default function AllTasks() {
   const handleSave = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const token = await auth.getAccessTokenSilently()
-      if (editedTasks) {
-        editViewMutation.mutate({
-          token,
-          tasks: editedTasks,
-        })
-        setEditing(false)
+    if (editedTasks) {
+      editViewMutation.mutate({
+        token,
+        tasks: editedTasks,
+      })
+      setEditing(false)
     }
   }
 
@@ -70,26 +71,25 @@ export default function AllTasks() {
     const updatedTasks = tasks?.map((task) => {
       if (task.id === taskId) {
         return {
-          ...task, 
-          completed: !task.completed
+          ...task,
+          completed: !task.completed,
         }
       }
       return task
     })
-  setEditedTasks(updatedTasks)
-  
+    setEditedTasks(updatedTasks)
 
-  const taskToUpdate =  tasks?.find((task) => task.id === taskId)
-  console.log(taskToUpdate)
-  if (taskToUpdate)
-  try {
-    await completeTaskMutation.mutate({...taskToUpdate, completed: true})
-  } catch (error) {
-    console.error('Unable to update task status!')
+    const taskToUpdate = tasks?.find((task) => task.id === taskId)
+    console.log(taskToUpdate)
+    if (taskToUpdate)
+      try {
+        await completeTaskMutation.mutate({ ...taskToUpdate, completed: true })
+      } catch (error) {
+        console.error('Unable to update task status!')
+      }
   }
-}
-  
-  	const deleteTaskMutation = useMutation(deleteTask, {
+
+  const deleteTaskMutation = useMutation(deleteTask, {
     onSuccess: async () => {
       queryClient.invalidateQueries(['tasks'])
     },
@@ -98,7 +98,6 @@ export default function AllTasks() {
   const handleDeleteClick = async (id: number) => {
     const token = await auth.getAccessTokenSilently()
     deleteTaskMutation.mutate({ id, token })
-
   }
 
   if (error) {
@@ -113,7 +112,7 @@ export default function AllTasks() {
     return <div>Loading...</div>
   }
   const incompleteTasks = tasks.filter((task) => !task.completed)
-  
+
   return (
     <section>
       <IfAuthenticated>
@@ -142,9 +141,7 @@ export default function AllTasks() {
             {incompleteTasks.map(({ id, name, description, completed }) => {
               return (
                 <div key={id}>
-                  <button onClick={() => handleDeleteClick(id)}>
-                    Delete
-                  </button>
+                  <button onClick={() => handleDeleteClick(id)}>Delete</button>
                   {editing ? (
                     <EditingView
                       id={id}
@@ -155,17 +152,24 @@ export default function AllTasks() {
                       onChange={onEditingViewChange}
                     />
                   ) : (
-                    <li key={id} style={{ listStyleType: 'none'}}>
-                     <label style={{ display: 'flex', alignItems: 'center'}}>
-                        <input 
-                         type="checkbox"
-                         style={{ marginRight: '0.5rem'}}
-                         checked={completed}
-                         onChange={() => handleTaskComlpete(id)}
+                    <li key={id} style={{ listStyleType: 'none' }}>
+                      <label style={{ display: 'flex', alignItems: 'center' }}>
+                        <input
+                          type="checkbox"
+                          style={{ marginRight: '0.5rem' }}
+                          checked={completed}
+                          onChange={() => handleTaskComlpete(id)}
                         />
-                       </label>
-                      <h2>Task: {name}</h2>
-                      <p>Notes: {description}</p>
+                      </label>
+                      <h2>
+                        Task:{' '}
+                        <Popup
+                          trigger={<button className="Notes">{name}</button>}
+                          position="right center"
+                        >
+                          <p>Notes: {description}</p>
+                        </Popup>
+                      </h2>
                     </li>
                   )}
                 </div>
