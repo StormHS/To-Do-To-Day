@@ -4,7 +4,7 @@ The To Do To Day team has created an app that will stop you from doom-scrolling 
 
 
 ## Features
-## Sign in:
+### Sign in:
 Sign in to start making your own personalized list of tasks that only tou can see.  
 ### Task Creation:
 Easily create new tasks by providing a title and a description. You can add as many tasks as you want to your task list.

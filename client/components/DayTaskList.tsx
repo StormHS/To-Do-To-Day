@@ -141,7 +141,6 @@ export default function AllTasks() {
             {incompleteTasks.map(({ id, name, description, completed }) => {
               return (
                 <div key={id}>
-                  <button onClick={() => handleDeleteClick(id)}>Delete</button>
                   {editing ? (
                     <EditingView
                       id={id}
@@ -152,24 +151,37 @@ export default function AllTasks() {
                       onChange={onEditingViewChange}
                     />
                   ) : (
-                    <li key={id} style={{ listStyleType: 'none' }}>
+                    <li
+                      className="in-line-flex"
+                      key={id}
+                      style={{ listStyleType: 'none' }}
+                    >
                       <label style={{ display: 'flex', alignItems: 'center' }}>
                         <input
                           type="checkbox"
+                          className="checkbox"
                           style={{ marginRight: '0.5rem' }}
                           checked={completed}
                           onChange={() => handleTaskComlpete(id)}
                         />
                       </label>
                       <h2>
-                        Task:{' '}
+                        {' '}
                         <Popup
-                          trigger={<button className="Notes">{name}</button>}
-                          position="right center"
+                          trigger={
+                            <button className="task-written">{name}</button>
+                          }
+                          position="bottom center"
                         >
-                          <p>Notes: {description}</p>
+                          <p className="notes">Notes - {description}</p>
                         </Popup>
                       </h2>
+                      <button
+                        className="delete-button"
+                        onClick={() => handleDeleteClick(id)}
+                      >
+                        x
+                      </button>
                     </li>
                   )}
                 </div>
