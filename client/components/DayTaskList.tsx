@@ -22,7 +22,7 @@ export default function AllTasks() {
   const queryClient = useQueryClient()
 
   useEffect(() => {
-    if (tasks && !editedTasks) {
+    if (tasks && tasks.length !== editedTasks?.length) {
       setEditedTasks(tasks)
     }
   }, [tasks, editedTasks])
@@ -77,6 +77,7 @@ export default function AllTasks() {
       return task
     })
   setEditedTasks(updatedTasks)
+  
 
   const taskToUpdate =  tasks?.find((task) => task.id === taskId)
   console.log(taskToUpdate)
@@ -86,8 +87,9 @@ export default function AllTasks() {
   } catch (error) {
     console.error('Unable to update task status!')
   }
+}
   
-  const deleteTaskMutation = useMutation(deleteTask, {
+  	const deleteTaskMutation = useMutation(deleteTask, {
     onSuccess: async () => {
       queryClient.invalidateQueries(['tasks'])
     },

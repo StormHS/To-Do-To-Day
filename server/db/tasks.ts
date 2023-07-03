@@ -40,13 +40,9 @@ export async function editTask(
 ): Promise<TaskRecord | undefined> {
   return db('taskListDay').where({ id }).update(task).returning('id')
 }
-export async function editTasks(tasks: TaskRecord[]) {
-  const updatePromises: unknown[] = []
-  tasks.forEach((task) => {
-    const updatePromise = db('taskListDay').where({ id: task.id }).update(task)
-    updatePromises.push(updatePromise)
-  })
-  // updatePromises = [Promise, ]
-  return await Promise.all(updatePromises)
 
+export async function editTasks(tasks: TaskRecord[]) {
+  return Promise.all(tasks.map((task) => {
+    return db('taskListDay').where({ id: task.id }).update(task)
+  }))
 }

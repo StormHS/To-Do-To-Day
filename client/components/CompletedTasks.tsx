@@ -5,10 +5,12 @@ import { useEffect, useState } from 'react'
 import { TaskRecord } from '../../models/task'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useAuth0 } from '@auth0/auth0-react'
 import NavBar from './NavBar'
 
 export default function CompletedTasks() {
-  const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
+  const auth = useAuth0()
+  const { data: tasks, error, isLoading } = useQuery(['tasks'], () => getTasks(auth))
   const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(undefined)
   const queryClient = useQueryClient()
   const [over, setOver] = useState(false)
@@ -58,6 +60,7 @@ export default function CompletedTasks() {
   if (!tasks || isLoading) {
     return <div>Loading...</div>
   }
+  
   const results = tasks.filter((task) => task.completed)
 
   // todo: if authenticated
@@ -65,7 +68,6 @@ export default function CompletedTasks() {
   return (
     <section>
       <div>
-        <NavBar />
         <h1>What You Did Today</h1>
         <div className="container">
           <div className="img-container">
