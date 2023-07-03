@@ -139,7 +139,7 @@ router.patch('/', checkJwt, async (req: JwtRequest, res) => {
 
   const tasks = req.body.tasks
 
-  await db.editTasks(tasks)
+  await db.editTasks(tasks, auth0Id)
   res.sendStatus(200)
 })
 

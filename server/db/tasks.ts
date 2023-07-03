@@ -41,8 +41,10 @@ export async function editTask(
   return db('taskListDay').where({ id }).update(task).returning('id')
 }
 
-export async function editTasks(tasks: TaskRecord[]) {
-  return Promise.all(tasks.map((task) => {
-    return db('taskListDay').where({ id: task.id }).update(task)
-  }))
+export async function editTasks(tasks: TaskRecord[], auth0id: string) {
+  return Promise.all(
+    tasks.map((task) => {
+      return db('taskListDay').where({ id: task.id, auth0id }).update(task)
+    })
+  )
 }
