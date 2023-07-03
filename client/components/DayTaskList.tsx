@@ -8,6 +8,7 @@ import TodoTodayListPopUp from './AddItemPopUp'
 import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
 import Popup from 'reactjs-popup'
+import ProgressBar from './ProgressBar'
 
 export default function AllTasks() {
   const auth = useAuth0()
@@ -193,6 +194,7 @@ export default function AllTasks() {
               Save
             </button>
           )}
+          <ProgressBar />
         </div>
       </IfAuthenticated>
       <IfNotAuthenticated>
