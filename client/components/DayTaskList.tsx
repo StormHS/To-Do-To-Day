@@ -171,9 +171,9 @@ export default function AllTasks() {
                           trigger={
                             <button className="task-written">{name}</button>
                           }
-                          position="right center"
+                          position="bottom center"
                         >
-                          <p>Notes - {description}</p>
+                          <p className="notes">Notes - {description}</p>
                         </Popup>
                       </h2>
                       <button

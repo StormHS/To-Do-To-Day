@@ -132,6 +132,7 @@ margin-bottom: 5%;
     color: black;
     border: none;
     background-color: whitesmoke;
+
     ;
 }
 
@@ -151,3 +152,13 @@ margin-bottom: 5%;
     flex-direction: row;
 }
 
+.notes {
+    background-color: rgb(194, 219, 197);
+    color: black;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 50px;
+
+}
