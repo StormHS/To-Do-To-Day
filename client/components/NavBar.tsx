@@ -15,7 +15,7 @@ export default function NavBar() {
         <tr>
           <IfAuthenticated>
             <th>
-              <Link className="nav-bar-buttons" to="/">
+              <Link className="nav-bar-buttons" href="/">
                 To Do
               </Link>
             </th>

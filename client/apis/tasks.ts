@@ -5,7 +5,6 @@ const tasksUrl = '/api/v1/tasks'
 
 export async function getTasks(): Promise<TaskRecord[]> {
   const response = await request.get(tasksUrl)
-  console.log(response.body)
   return response.body.tasks
 }
 

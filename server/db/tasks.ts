@@ -42,7 +42,6 @@ export async function editTask(
 export async function editTasks(tasks: TaskRecord[]) {
   const updatePromises: unknown[] = []
   tasks.forEach((task) => {
-    console.log({task})
     const updatePromise = db('taskListDay').where({ id: task.id }).update(task)
     updatePromises.push(updatePromise)
   })

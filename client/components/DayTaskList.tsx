@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
-import { editTask, getTasks } from '../apis/tasks'
+import { editTask, getTasks, updateCompletion } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
@@ -44,6 +44,12 @@ export default function AllTasks() {
     },
   })
 
+  const completeTaskMutation = useMutation(updateCompletion, {
+    onSuccess: async () => {
+      queryClient.invalidateQueries(['tasks'])
+    },
+  })
+
   const handleSave = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
     const token = await getAccessTokenSilently()
@@ -54,6 +60,29 @@ export default function AllTasks() {
       })
       setEditing(false)
     }
+  }
+
+  const handleTaskComlpete = async (taskId: number) => {
+    const updatedTasks = tasks?.map((task) => {
+      if (task.id === taskId) {
+        return {
+          ...task, 
+          completed: !task.completed
+        }
+      }
+      return task
+    })
+  setEditedTasks(updatedTasks)
+
+  const taskToUpdate =  tasks?.find((task) => task.id === taskId)
+  console.log(taskToUpdate)
+  if (taskToUpdate)
+  try {
+    await completeTaskMutation.mutate({...taskToUpdate, completed: true})
+  } catch (error) {
+    console.error('Unable to update task status!')
+  }
+  
   }
 
   if (error) {
@@ -67,7 +96,8 @@ export default function AllTasks() {
   if (!tasks || isLoading || isLoadingAuth) {
     return <div>Loading...</div>
   }
-
+  const incompleteTasks = tasks.filter((task) => !task.completed)
+  
   return (
     <section>
       <IfAuthenticated>
@@ -93,7 +123,7 @@ export default function AllTasks() {
             </span>
           </div>
           <ul className="listFlex listMargin">
-            {tasks.map(({ id, name, description, completed }) => {
+            {incompleteTasks.map(({ id, name, description, completed }) => {
               return (
                 <div key={id}>
                   {editing ? (
@@ -106,7 +136,15 @@ export default function AllTasks() {
                       onChange={onEditingViewChange}
                     />
                   ) : (
-                    <li key={id}>
+                    <li key={id} style={{ listStyleType: 'none'}}>
+                     <label style={{ display: 'flex', alignItems: 'center'}}>
+                        <input 
+                         type="checkbox"
+                         style={{ marginRight: '0.5rem'}}
+                         checked={completed}
+                         onChange={() => handleTaskComlpete(id)}
+                        />
+                       </label>
                       <h2>Task: {name}</h2>
                       <p>Notes: {description}</p>
                     </li>
@@ -122,7 +160,6 @@ export default function AllTasks() {
           )}
         </div>
       </IfAuthenticated>
-
       <IfNotAuthenticated>
         <Home />
       </IfNotAuthenticated>
