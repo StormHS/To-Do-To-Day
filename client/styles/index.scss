@@ -103,7 +103,6 @@ margin-bottom: 5%;
 
 .nav-bar-buttons {
     font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-decoration: none;
     margin-left: 50px;
     margin-right: 50px;
     font-size: 20px;
@@ -124,5 +123,31 @@ margin-bottom: 5%;
     font-size: 20px;
     border: none;
     background-color: whitesmoke;
+}
+
+.task-written {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    background-color: whitesmoke;
+    ;
+}
+
+.delete-button {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    background-color: whitesmoke;
+    font-size: larger
+    ;
+}
+
+.in-line-flex {
+    display: flex;
+    flex-direction: row;
 }
 
