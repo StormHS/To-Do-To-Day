@@ -4,7 +4,6 @@ import { Auth0ContextInterface, User } from '@auth0/auth0-react'
 
 const tasksUrl = '/api/v1/tasks'
 
-
 export async function getTasks(
   auth: Auth0ContextInterface<User>
 ): Promise<TaskRecord[]> {
@@ -27,14 +26,11 @@ export async function updateCompletion({
   return response.body
 }
 
-export async function TaskCreate(
-  Create: TaskData,
-  token: string
-): Promise<void> {
+export async function taskCreate(data: TaskData, token: string): Promise<void> {
   await request
     .post(tasksUrl)
     .set('Authorization', `Bearer ${token}`)
-    .send(Create)
+    .send(data)
 }
 
 export async function editTask({ token, tasks }: UpdateTask): Promise<void> {

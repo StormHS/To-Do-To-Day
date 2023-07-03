@@ -122,7 +122,6 @@ router.patch('/:id', checkJwt, async (req: JwtRequest, res) => {
     return
   }
   const task = req.body
-  //             Could be wrong here
   await db.editTask(task, id)
   res.sendStatus(200)
 })
