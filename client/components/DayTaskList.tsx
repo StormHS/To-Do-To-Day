@@ -1,6 +1,6 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { useState, useEffect } from 'react'
-import { editTask, getTasks, updateCompletion } from '../apis/tasks'
+import { editTask, getTasks, updateCompletion,  deleteTask } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
@@ -9,13 +9,17 @@ import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
 
 export default function AllTasks() {
-  const { data: tasks, error, isLoading } = useQuery(['tasks'], getTasks)
+  const auth = useAuth0()
+  const {
+    data: tasks,
+    error,
+    isLoading,
+  } = useQuery(['tasks'], () => getTasks(auth))
   const [editing, setEditing] = useState(false)
   const [editedTasks, setEditedTasks] = useState<TaskRecord[] | undefined>(
     undefined
   )
   const queryClient = useQueryClient()
-  const { getAccessTokenSilently, isLoading: isLoadingAuth } = useAuth0()
 
   useEffect(() => {
     if (tasks && !editedTasks) {
@@ -52,13 +56,13 @@ export default function AllTasks() {
 
   const handleSave = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
-    const token = await getAccessTokenSilently()
-    if (editedTasks) {
-      editViewMutation.mutate({
-        token,
-        tasks: editedTasks,
-      })
-      setEditing(false)
+    const token = await auth.getAccessTokenSilently()
+      if (editedTasks) {
+        editViewMutation.mutate({
+          token,
+          tasks: editedTasks,
+        })
+        setEditing(false)
     }
   }
 
@@ -83,6 +87,16 @@ export default function AllTasks() {
     console.error('Unable to update task status!')
   }
   
+  const deleteTaskMutation = useMutation(deleteTask, {
+    onSuccess: async () => {
+      queryClient.invalidateQueries(['tasks'])
+    },
+  })
+
+  const handleDeleteClick = async (id: number) => {
+    const token = await auth.getAccessTokenSilently()
+    deleteTaskMutation.mutate({ id, token })
+
   }
 
   if (error) {
@@ -93,7 +107,7 @@ export default function AllTasks() {
     }
   }
 
-  if (!tasks || isLoading || isLoadingAuth) {
+  if (!tasks || isLoading || auth.isLoading) {
     return <div>Loading...</div>
   }
   const incompleteTasks = tasks.filter((task) => !task.completed)
@@ -126,6 +140,9 @@ export default function AllTasks() {
             {incompleteTasks.map(({ id, name, description, completed }) => {
               return (
                 <div key={id}>
+                  <button onClick={() => handleDeleteClick(id)}>
+                    Delete
+                  </button>
                   {editing ? (
                     <EditingView
                       id={id}
