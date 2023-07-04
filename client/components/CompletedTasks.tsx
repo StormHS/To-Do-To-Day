@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth0 } from '@auth0/auth0-react'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
+import Undo from './Undo'
 
 export default function CompletedTasks() {
   const auth = useAuth0()
@@ -92,6 +93,7 @@ export default function CompletedTasks() {
                 alt="Little animal"
               />
             </div>
+            </div>
               <button className="delete-button" onClick={handleDeleteClick}>
                Clear all
               </button>
@@ -106,7 +108,7 @@ export default function CompletedTasks() {
                     onMouseLeave={() => setOver(false)}
                     onFocus={() => setOver(true)}
                     >
-                    <FontAwesomeIcon icon={faUndo} style={over ? { color: "red" } : {}} />
+                    <Undo />
                   <input 
                     type="checkbox"
                     style={{ marginRight: '0.5rem', visibility: "hidden"}}
