@@ -39,6 +39,4 @@ function Home() {
   )
 }
 
-//redirect url in auth0
-
 export default Home

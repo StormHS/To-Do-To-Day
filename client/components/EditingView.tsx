@@ -21,7 +21,7 @@ export default function EditingView({
     id,
     name,
     description,
-    completed,
+    completed
   })
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
