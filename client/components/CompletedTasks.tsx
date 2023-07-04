@@ -6,7 +6,7 @@ import { TaskRecord } from '../../models/task'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth0 } from '@auth0/auth0-react'
-import NavBar from './NavBar'
+import Undo from './Undo'
 
 export default function CompletedTasks() {
   const auth = useAuth0()
@@ -85,11 +85,7 @@ export default function CompletedTasks() {
                 <label style={{ 
                     display: 'flex', 
                     alignItems: 'center' }}   
-                    onMouseOver={() => setOver(true)}
-                    onMouseLeave={() => setOver(false)}
-                    onFocus={() => setOver(true)}
-                    >
-                    <FontAwesomeIcon icon={faUndo} style={over ? { color: "red" } : {}} />
+                    ><Undo />
                   <input 
                     type="checkbox"
                     style={{ marginRight: '0.5rem', visibility: "hidden"}}
