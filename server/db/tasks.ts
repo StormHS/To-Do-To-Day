@@ -48,3 +48,7 @@ export async function editTasks(tasks: TaskRecord[], auth0id: string) {
     })
   )
 }
+
+export async function deleteAllTasks(auth0id: string): Promise<void> {
+  await db('taskListDay').where({ auth0id, completed: true }).delete()
+}
