@@ -5,10 +5,8 @@ import { TaskRecord } from '../../models/task'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth0 } from '@auth0/auth0-react'
-import NavBar from './NavBar'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
-import Popup from 'reactjs-popup'
 
 export default function CompletedTasks() {
   const auth = useAuth0()
@@ -113,7 +111,7 @@ export default function CompletedTasks() {
                     type="checkbox"
                     style={{ marginRight: '0.5rem', visibility: "hidden"}}
                     checked={completed}
-                    onChange={() => handleTaskComlpete(id)}
+                    onChange={() => handleTaskComplete(id)}
                   />
                 </label>
                 <h2>Task: {name}</h2>
