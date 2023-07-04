@@ -7,6 +7,7 @@ import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import Popup from 'reactjs-popup'
 import Undo from './Undo'
+import imgUrl from '../images/companion.png'
 
 export default function CompletedTasks() {
   const auth = useAuth0()
@@ -87,11 +88,7 @@ export default function CompletedTasks() {
           <h1>What You Did Today</h1>
           <div className="container">
             <div className="img-container">
-              <img
-                className="imgFlex"
-                src="../../images/companion.png"
-                alt="Little animal"
-              />
+              <img className="imgFlex" src={imgUrl} alt="Little animal" />
             </div>
 
             <ul className="listFlex">
