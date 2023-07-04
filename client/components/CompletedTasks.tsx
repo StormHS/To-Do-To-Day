@@ -73,7 +73,7 @@ export default function CompletedTasks() {
 
   return (
     <section>
-      <IfAuthenticated>
+     <IfAuthenticated>
         <div>
           <h1>What You Did Today</h1>
           <div className="container">
@@ -112,6 +112,10 @@ export default function CompletedTasks() {
           </ul>
         </div>
       </div>
+      </IfAuthenticated>
+      <IfNotAuthenticated>
+        <Home />
+      </IfNotAuthenticated>
     </section>
   )
 }
