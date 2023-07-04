@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap');
 @font-face {
     font-family: 'OpenDyslexicMono';
-    // src: url(OpenDyslexicMono-Regular.woff) format('woff');
     src: url(OpenDyslexicMono-Regular-2.otf) format('opentype');
 }
 
@@ -103,7 +102,6 @@ margin-bottom: 5%;
 
 .nav-bar-buttons {
     font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-decoration: none;
     margin-left: 50px;
     margin-right: 50px;
     font-size: 20px;
@@ -126,3 +124,40 @@ margin-bottom: 5%;
     background-color: whitesmoke;
 }
 
+.task-written {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    background-color: whitesmoke;
+
+    ;
+}
+
+.delete-button {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    background-color: whitesmoke;
+    font-size: larger
+    ;
+}
+
+.in-line-flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.notes {
+    background-color: rgb(194, 219, 197);
+    color: black;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    border-radius: 50px;
+
+}

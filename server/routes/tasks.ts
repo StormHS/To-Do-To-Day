@@ -122,7 +122,6 @@ router.patch('/:id', checkJwt, async (req: JwtRequest, res) => {
     return
   }
   const task = req.body
-  //             Could be wrong here
   await db.editTask(task, id)
   res.sendStatus(200)
 })
@@ -139,7 +138,7 @@ router.patch('/', checkJwt, async (req: JwtRequest, res) => {
 
   const tasks = req.body.tasks
 
-  await db.editTasks(tasks)
+  await db.editTasks(tasks, auth0Id)
   res.sendStatus(200)
 })
 
