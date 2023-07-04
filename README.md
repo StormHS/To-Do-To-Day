@@ -6,7 +6,7 @@ The To Do To Day team has created an a task management app that will stop you fr
 
 ## Features
 ### Sign in:
-Sign in to start making your own personalized list of tasks that only tou can see.  
+Sign in to start making your own personalized list of tasks that only you can see.  
 ### Task Creation:
 Easily create new tasks by providing a title and a description. You can add as many tasks as you want to your task list.
 ### Task Editing:
@@ -16,7 +16,7 @@ Mark tasks as complete once you finish them. This will then archive the task tha
 ### Task Deletion:
 Accidentally added a task that you did yesterday? No drama baby Llama, hit the delete button the task will disappear.
 ### Progress Bar:
-Enjoy the sweet satisfaction of seeing the progress bar fill upo every time you complete a task.
+Enjoy the sweet satisfaction of seeing the progress bar fill up every time you complete a task.
 ### Done Page:
 Bask in the glory of being a functional adult by seeing all the tasks that you've completed on this page. Move tasks back to the to-do list any time.
 ### Clear All:
