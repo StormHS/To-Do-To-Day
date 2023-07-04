@@ -5,6 +5,7 @@ import { TaskRecord } from '../../models/task'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth0 } from '@auth0/auth0-react'
+import NavBar from './NavBar'
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import Home from './Home'
 import Popup from 'reactjs-popup'
@@ -82,7 +83,7 @@ export default function CompletedTasks() {
 
   return (
     <section>
-      <IfAuthenticated>
+     <IfAuthenticated>
         <div>
           <h1>What You Did Today</h1>
           <div className="container">
@@ -93,47 +94,36 @@ export default function CompletedTasks() {
                 alt="Little animal"
               />
             </div>
-
-            <button className="delete-button" onClick={handleDeleteClick}>
-              Clear all
-            </button>
-
-            <ul className="listFlex">
-              {results.map(({ id, name, description, completed }) => {
-                return (
-                  <li key={id} style={{ listStyleType: 'none' }}>
-                    <label
-                      style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                      }}
-                      onMouseOver={() => setOver(true)}
-                      onMouseLeave={() => setOver(false)}
-                      onFocus={() => setOver(true)}
+              <button className="delete-button" onClick={handleDeleteClick}>
+               Clear all
+              </button>
+          <ul className="listFlex">
+            {results.map(({ id, name, description, completed }) => {
+              return (
+                <li key={id} style={{ listStyleType: 'none'}}>
+                <label style={{ 
+                    display: 'flex', 
+                    alignItems: 'center' }}   
+                    onMouseOver={() => setOver(true)}
+                    onMouseLeave={() => setOver(false)}
+                    onFocus={() => setOver(true)}
                     >
-                      <FontAwesomeIcon
-                        icon={faUndo}
-                        style={over ? { color: 'red' } : {}}
-                      />
-                      <input
-                        type="checkbox"
-                        style={{ marginRight: '0.5rem', visibility: 'hidden' }}
-                        checked={completed}
-                        onChange={() => handleTaskComplete(id)}
-                      />
-                    </label>
-                    <Popup
-                      trigger={<button className="task-written">{name}</button>}
-                      position="bottom center"
-                    >
-                      <p className="notes">Notes - {description}</p>
-                    </Popup>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
+                    <FontAwesomeIcon icon={faUndo} style={over ? { color: "red" } : {}} />
+                  <input 
+                    type="checkbox"
+                    style={{ marginRight: '0.5rem', visibility: "hidden"}}
+                    checked={completed}
+                    onChange={() => handleTaskComlpete(id)}
+                  />
+                </label>
+                <h2>Task: {name}</h2>
+                <p>Notes: {description}</p>
+              </li>
+              )
+          })}
+          </ul>
         </div>
+      </div>
       </IfAuthenticated>
       <IfNotAuthenticated>
         <Home />
