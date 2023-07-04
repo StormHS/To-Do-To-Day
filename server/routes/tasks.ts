@@ -83,6 +83,24 @@ router.post('/', checkJwt, async (req: JwtRequest, res) => {
   }
 })
 
+// DELETE /api/v1/task/completed
+router.delete('/completed', checkJwt, async (req: JwtRequest, res) => {
+  const auth0Id = req.auth?.sub
+
+  if (!auth0Id) {
+    console.error('No auth0Id')
+    return res.status(401).send('Unauthorized')
+  }
+
+  try {
+    await db.deleteAllTasks(auth0Id)
+    res.sendStatus(200)
+  } catch (error) {
+    console.log(error)
+    res.status(500).send('could not delete TaskRecord')
+  }
+})
+
 // DELETE /api/v1/task
 router.delete('/:id', checkJwt, async (req: JwtRequest, res) => {
   const auth0Id = req.auth?.sub

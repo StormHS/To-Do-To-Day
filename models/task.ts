@@ -17,3 +17,7 @@ export interface DeleteTask {
   id: number
   token: string
 }
+
+export interface DeleteCompletedTasks {
+  token: string
+}

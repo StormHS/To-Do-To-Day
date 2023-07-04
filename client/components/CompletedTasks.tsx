@@ -1,4 +1,4 @@
-import { getTasks, updateCompletion } from '../apis/tasks'
+import { deleteCompletedTasks, getTasks, updateCompletion } from '../apis/tasks'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { useEffect, useState } from 'react'
 import { TaskRecord } from '../../models/task'
@@ -22,6 +22,16 @@ export default function CompletedTasks() {
   const queryClient = useQueryClient()
   const [over, setOver] = useState(false)
 
+  const deleteTaskMutation = useMutation(deleteCompletedTasks, {
+    onSuccess: async () => {
+      queryClient.invalidateQueries(['tasks'])
+    },
+  })
+
+  const handleDeleteClick = async () => {
+    const token = await auth.getAccessTokenSilently()
+    deleteTaskMutation.mutate({ token })
+  }
   useEffect(() => {
     if (tasks && !editedTasks) {
       setEditedTasks(tasks)
@@ -34,7 +44,7 @@ export default function CompletedTasks() {
     },
   })
 
-  const handleTaskComlpete = async (taskId: number) => {
+  const handleTaskComplete = async (taskId: number) => {
     const updatedTasks = tasks?.map((task) => {
       if (task.id === taskId) {
         return {
@@ -84,6 +94,10 @@ export default function CompletedTasks() {
               />
             </div>
 
+            <button className="delete-button" onClick={handleDeleteClick}>
+              Clear all
+            </button>
+
             <ul className="listFlex">
               {results.map(({ id, name, description, completed }) => {
                 return (
@@ -105,7 +119,7 @@ export default function CompletedTasks() {
                         type="checkbox"
                         style={{ marginRight: '0.5rem', visibility: 'hidden' }}
                         checked={completed}
-                        onChange={() => handleTaskComlpete(id)}
+                        onChange={() => handleTaskComplete(id)}
                       />
                     </label>
                     <Popup
