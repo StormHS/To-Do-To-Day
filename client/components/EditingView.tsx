@@ -17,7 +17,7 @@ export default function EditingView({
   completed,
   onChange,
 }: Props) {
-  const [form, setForm] = useState<TaskRecord>({ id, name, description, completed })
+  const [form, setForm] = useState<TaskRecord>({ id, name, description, completed, })
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target
