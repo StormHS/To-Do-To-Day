@@ -73,7 +73,7 @@ export default function CompletedTasks() {
 
   return (
     <section>
-     <IfAuthenticated>
+      <IfAuthenticated>
         <div>
           <h1>What You Did Today</h1>
           <div className="container">
@@ -85,33 +85,53 @@ export default function CompletedTasks() {
               />
             </div>
 
-          <ul className="listFlex">
-            {results.map(({ id, name, description, completed }) => {
-              return (
-                <li key={id} style={{ listStyleType: 'none'}}>
-                <label style={{ 
-                    display: 'flex', 
-                    alignItems: 'center' }}   
-                    onMouseOver={() => setOver(true)}
-                    onMouseLeave={() => setOver(false)}
-                    onFocus={() => setOver(true)}
-                    >
-                    <FontAwesomeIcon icon={faUndo} style={over ? { color: "red" } : {}} />
-                  <input 
-                    type="checkbox"
-                    style={{ marginRight: '0.5rem', visibility: "hidden"}}
-                    checked={completed}
-                    onChange={() => handleTaskComlpete(id)}
-                  />
-                </label>
-                <h2>Task: {name}</h2>
-                <p>Notes: {description}</p>
-              </li>
-              )
-          })}
-          </ul>
+            <ul className="listFlex">
+              {results.map(({ id, name, description, completed }) => {
+                return (
+                  <li key={id} style={{ listStyleType: 'circle' }}>
+                    <div className="in-line-flex">
+                      <h2>
+                        {' '}
+                        <Popup
+                          trigger={
+                            <button className="task-written">{name}</button>
+                          }
+                          position="bottom center"
+                        >
+                          <p className="notes">Notes - {description}</p>
+                        </Popup>
+                      </h2>
+                      <label
+                        style={{
+                          display: 'flex',
+                          alignItems: 'center',
+                        }}
+                        onMouseOver={() => setOver(true)}
+                        onMouseLeave={() => setOver(false)}
+                        onFocus={() => setOver(true)}
+                      >
+                        <input
+                          type="checkbox"
+                          className="checkbox"
+                          style={{
+                            marginRight: '0.5rem',
+                            visibility: 'hidden',
+                          }}
+                          checked={completed}
+                          onChange={() => handleTaskComlpete(id)}
+                        />
+                        <FontAwesomeIcon
+                          icon={faUndo}
+                          style={over ? { color: 'red' } : {}}
+                        />
+                      </label>
+                    </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
         </div>
-      </div>
       </IfAuthenticated>
       <IfNotAuthenticated>
         <Home />

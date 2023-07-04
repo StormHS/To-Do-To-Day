@@ -9,5 +9,5 @@ export default function ProgressBar() {
   const progress = completedTasks?.length || 0
   const totalTasks = tasks?.length || 0
 
-  return <progress value={progress} max={totalTasks} />
+  return <progress className="progress-bar" value={progress} max={totalTasks} />
 }

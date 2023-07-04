@@ -152,12 +152,51 @@ margin-bottom: 5%;
 }
 
 .notes {
-    background-color: rgb(194, 219, 197);
+    background-color: rgb(251, 209, 130);
     color: black;
     padding-left: 100px;
     padding-right: 100px;
-    padding-top: 50px;
-    padding-bottom: 50px;
+    padding-top: 30px;
+    padding-bottom: 30px;
     border-radius: 50px;
+    font-size: 15px;
 
 }
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+
+.checkbox {
+border: 2px solid black;
+// background-color: rgba(14, 203, 14, 0.432);
+}
+
+
+progress {
+    -webkit-appearance: none;
+}
+.progress-bar {
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    height: 40px;
+    border: 5px ridge rgb(205, 144, 32);
+
+}
+
+.progress-bar::-webkit-progress-value {
+background-color: rgb(243, 113, 14);
+}
+
+.progress-bar::-webkit-progress-bar {
+    background-color: blanchedalmond;    
+}
+
+
+
