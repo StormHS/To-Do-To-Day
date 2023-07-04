@@ -1,5 +1,11 @@
 import request from 'superagent'
-import { DeleteTask, TaskData, TaskRecord, UpdateTask } from '../../models/task'
+import {
+  DeleteCompletedTasks,
+  DeleteTask,
+  TaskData,
+  TaskRecord,
+  UpdateTask,
+} from '../../models/task'
 import { Auth0ContextInterface, User } from '@auth0/auth0-react'
 
 const tasksUrl = '/api/v1/tasks'
@@ -43,5 +49,13 @@ export async function editTask({ token, tasks }: UpdateTask): Promise<void> {
 export async function deleteTask({ id, token }: DeleteTask): Promise<void> {
   await request
     .delete(`${tasksUrl}/${id}`)
+    .set('Authorization', `Bearer ${token}`)
+}
+
+export async function deleteCompletedTasks({
+  token,
+}: DeleteCompletedTasks): Promise<void> {
+  await request
+    .delete(`${tasksUrl}/completed`)
     .set('Authorization', `Bearer ${token}`)
 }

@@ -12,26 +12,28 @@ export default function NavBar() {
   return (
     <div className="nav-bar">
       <table>
-        <tr>
-          <IfAuthenticated>
-            <th>
-              <Link className="nav-bar-buttons" to="/">
-                To Do
-              </Link>
-            </th>
-            <th>
-              <Link className="nav-bar-buttons" to="/completed">
-                Done
-              </Link>
-            </th>
-            <th>
-              <button onClick={handleSignOut} className="sign-out-button">
-                Sign out
-              </button>
-              {/* {user && <p>Signed in as: {user?.nickname}</p>} */}
-            </th>
-          </IfAuthenticated>
-        </tr>
+        <tbody>
+          <tr>
+            <IfAuthenticated>
+              <th>
+                <Link className="nav-bar-buttons" to="/">
+                  To Do
+                </Link>
+              </th>
+              <th>
+                <Link className="nav-bar-buttons" to="/completed">
+                  Done
+                </Link>
+              </th>
+              <th>
+                <button onClick={handleSignOut} className="sign-out-button">
+                  Sign out
+                </button>
+                {/* {user && <p>Signed in as: {user?.nickname}</p>} */}
+              </th>
+            </IfAuthenticated>
+          </tr>
+        </tbody>
       </table>
     </div>
   )

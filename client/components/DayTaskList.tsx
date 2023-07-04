@@ -68,7 +68,7 @@ export default function AllTasks() {
     }
   }
 
-  const handleTaskComlpete = async (taskId: number) => {
+  const handleTaskComplete = async (taskId: number) => {
     const updatedTasks = tasks?.map((task) => {
       if (task.id === taskId) {
         return {
@@ -163,7 +163,7 @@ export default function AllTasks() {
                           className="checkbox"
                           style={{ marginRight: '0.5rem' }}
                           checked={completed}
-                          onChange={() => handleTaskComlpete(id)}
+                          onChange={() => handleTaskComplete(id)}
                         />
                       </label>
                       <h2>
