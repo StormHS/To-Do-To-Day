@@ -84,6 +84,7 @@ export default function AddItemPopUp() {
                 name="name"
                 onChange={handleChange}
                 value={form.name}
+                autoComplete="off"
                 required
               ></input>{' '}
               <br />
@@ -96,6 +97,7 @@ export default function AddItemPopUp() {
                 name="description"
                 onChange={handleChange}
                 value={form.description}
+                autoComplete="off"
               ></input>
               <div className="buttonContainer">
                 <button className="button">Submit</button>
