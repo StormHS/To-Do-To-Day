@@ -174,7 +174,7 @@ input[type="checkbox"] {
 
 .checkbox {
 border: 2px solid black;
-// background-color: rgba(14, 203, 14, 0.432);
+background-color: rgb(243, 113, 14);
 }
 
 
@@ -186,7 +186,8 @@ progress {
     margin-left: 35%;
     margin-right: 35%;
     height: 40px;
-    border: 5px ridge rgb(205, 144, 32);
+    border: 6px ridge rgb(205, 144, 32);
+    // border: 5px solid black;
 
 }
 
