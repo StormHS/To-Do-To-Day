@@ -107,7 +107,7 @@ export default function CompletedTasks() {
                           }
                           position="bottom center"
                         >
-                          <p className="notes">Notes - {description}</p>
+                          <p className="notes">{description}</p>
                         </Popup>
                       </h2>
                       <label

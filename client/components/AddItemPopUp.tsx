@@ -96,7 +96,6 @@ export default function AddItemPopUp() {
                 name="description"
                 onChange={handleChange}
                 value={form.description}
-                required
               ></input>
               <div className="buttonContainer">
                 <button className="button">Submit</button>
