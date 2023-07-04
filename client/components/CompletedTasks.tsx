@@ -20,7 +20,7 @@ export default function CompletedTasks() {
   )
   const queryClient = useQueryClient()
   const [over, setOver] = useState(false)
-  
+
   const deleteTaskMutation = useMutation(deleteCompletedTasks, {
     onSuccess: async () => {
       queryClient.invalidateQueries(['tasks'])
@@ -31,7 +31,7 @@ export default function CompletedTasks() {
     const token = await auth.getAccessTokenSilently()
     deleteTaskMutation.mutate({ token })
   }
-  
+
   useEffect(() => {
     if (tasks && !editedTasks) {
       setEditedTasks(tasks)
@@ -93,9 +93,7 @@ export default function CompletedTasks() {
                 alt="Little animal"
               />
             </div>
-            <button className="delete-button" onClick={handleDeleteClick}>
-               Clear all
-              </button>
+
             <ul className="listFlex">
               {results.map(({ id, name, description, completed }) => {
                 return (
@@ -139,6 +137,9 @@ export default function CompletedTasks() {
               })}
             </ul>
           </div>
+          <button className="delete-all-button" onClick={handleDeleteClick}>
+            delete all
+          </button>
         </div>
       </IfAuthenticated>
       <IfNotAuthenticated>

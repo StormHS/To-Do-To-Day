@@ -98,6 +98,7 @@ margin-bottom: 5%;
     margin-bottom: 5px;
     background-color: blanchedalmond;
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .nav-bar-buttons {
@@ -107,11 +108,13 @@ margin-bottom: 5%;
     font-size: 20px;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
 .save-button {
     margin-left: 35%;
     width: max-content;
+    cursor: pointer;
 }
 
 .sign-out-button {
@@ -122,6 +125,7 @@ margin-bottom: 5%;
     font-size: 20px;
     border: none;
     background-color: whitesmoke;
+    cursor: pointer;
 }
 
 .task-written {
@@ -130,6 +134,7 @@ margin-bottom: 5%;
     text-decoration: none;
     color: black;
     border: none;
+    cursor: pointer;
     background-color: whitesmoke;
 
     ;
@@ -142,8 +147,8 @@ margin-bottom: 5%;
     color: black;
     border: none;
     background-color: whitesmoke;
-    font-size: larger
-    ;
+    cursor: pointer;
+  
 }
 
 .in-line-flex {
@@ -160,6 +165,7 @@ margin-bottom: 5%;
     padding-bottom: 30px;
     border-radius: 50px;
     font-size: 15px;
+    
 
 }
 input[type="checkbox"] {
@@ -175,6 +181,7 @@ input[type="checkbox"] {
 .checkbox {
 border: 2px solid black;
 background-color: rgb(243, 113, 14);
+
 }
 
 
@@ -200,4 +207,22 @@ background-color: rgb(243, 113, 14);
 }
 
 
+.delete-all-button {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    background-color: whitesmoke;
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+    background-color: blanchedalmond;
+    border-radius: 50px;
+    cursor: pointer;
 
+}
+
+.undo-button {
+    cursor: pointer;
+}

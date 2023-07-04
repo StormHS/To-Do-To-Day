@@ -1,17 +1,18 @@
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {  useState } from 'react'
+import { useState } from 'react'
 
 export default function Undo() {
-
-const [over, setOver] = useState(false)
+  const [over, setOver] = useState(false)
 
   return (
-    <div 
+    <div
+      className="undo-button"
       onMouseOver={() => setOver(true)}
       onMouseLeave={() => setOver(false)}
-      onFocus={() => setOver(true)}>
-      <FontAwesomeIcon icon={faUndo} style={over ? { color: "red" } : {}} />
+      onFocus={() => setOver(true)}
+    >
+      <FontAwesomeIcon icon={faUndo} style={over ? { color: 'red' } : {}} />
     </div>
   )
 }
