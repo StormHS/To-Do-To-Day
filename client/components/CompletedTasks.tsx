@@ -6,7 +6,6 @@ import { TaskRecord } from '../../models/task'
 import { faUndo } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useAuth0 } from '@auth0/auth0-react'
-import NavBar from './NavBar'
 
 export default function CompletedTasks() {
   const auth = useAuth0()
