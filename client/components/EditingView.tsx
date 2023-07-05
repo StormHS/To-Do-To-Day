@@ -6,6 +6,7 @@ interface Props {
   name: string
   description: string
   completed: boolean
+  auth0id: string
   onChange: (task: TaskRecord) => void
   onUpdateComplete: () => void
 }
@@ -15,19 +16,11 @@ export default function EditingView({
   name,
   description,
   completed,
+  auth0id,
   onChange,
 }: Props) {
-<<<<<<< HEAD
-  const [form, setForm] = useState<TaskRecord>({
-    id,
-    name,
-    description,
-    completed
-  })
-=======
 
-  const [form, setForm] = useState<TaskRecord>({ id, name, description, completed, })
->>>>>>> e511b1917a005eb1ea2d8575c306a4d7565311ba
+  const [form, setForm] = useState<TaskRecord>({ id, name, description, completed, auth0id })
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const { name, value } = event.target

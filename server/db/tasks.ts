@@ -40,7 +40,7 @@ export async function editTask(
   return db('taskListDay').where({ id }).update(task).returning('id')
 }
 
-export async function editTasks(tasks: TaskRecord[], auth0id: string) {
+export async function editTasks(tasks: TaskRecord[], auth0id: string, db = connection) {
   return Promise.all(
     tasks.map((task) => {
       return db('taskListDay').where({ id: task.id, auth0id }).update(task)
@@ -48,6 +48,6 @@ export async function editTasks(tasks: TaskRecord[], auth0id: string) {
   )
 }
 
-export async function deleteAllTasks(auth0id: string): Promise<void> {
+export async function deleteAllTasks(auth0id: string, db = connection): Promise<void> {
   await db('taskListDay').where({ auth0id, completed: true }).delete()
 }
