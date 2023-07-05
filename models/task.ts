@@ -14,6 +14,10 @@ export interface UpdateTask {
 }
 
 export interface DeleteTask {
-  id: TaskRecord['id']
+  id: number
+  token: string
+}
+
+export interface DeleteCompletedTasks {
   token: string
 }

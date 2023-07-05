@@ -2,13 +2,14 @@ import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { ChangeEvent, FormEvent, useState } from 'react'
 import Popup from 'reactjs-popup'
 import { TaskData } from '../../models/task'
-import { TaskCreate } from '../apis/tasks'
+import { taskCreate } from '../apis/tasks'
 import { useAuth0 } from '@auth0/auth0-react'
 
 const initialFormData: TaskData = {
   name: '',
   description: '',
   completed: false,
+  auth0id: '',
 }
 
 interface CreateTaskArgs {
@@ -17,14 +18,14 @@ interface CreateTaskArgs {
 }
 
 async function createTask(args: CreateTaskArgs) {
-  return TaskCreate(args.task, args.token)
+  return taskCreate(args.task, args.token)
 }
 
 export default function AddItemPopUp() {
   const [form, setForm] = useState<TaskData>(initialFormData)
   const queryClient = useQueryClient()
   const { getAccessTokenSilently } = useAuth0()
-  const TaskCreateMutation = useMutation<void, unknown, CreateTaskArgs>(
+  const taskCreateMutation = useMutation<void, unknown, CreateTaskArgs>(
     createTask,
     {
       onSuccess: async () => {
@@ -46,15 +47,15 @@ export default function AddItemPopUp() {
     event.preventDefault()
     const newForm = { ...form }
     const token = await getAccessTokenSilently()
-    TaskCreateMutation.mutate({ task: newForm, token })
+    taskCreateMutation.mutate({ task: newForm, token })
     setForm(initialFormData)
   }
 
-  if (TaskCreateMutation.isError) {
+  if (taskCreateMutation.isError) {
     return <div>There was an error trying to submit this form</div>
   }
 
-  if (TaskCreateMutation.isLoading) {
+  if (taskCreateMutation.isLoading) {
     return <div>Sending this in</div>
   }
 
@@ -63,7 +64,7 @@ export default function AddItemPopUp() {
       trigger={<button className="add-edit-button">+</button>}
       position="right center"
     >
-      <div style={{ backgroundColor: 'white', textAlign: 'center' }}>
+      <div>
         <div>
           <h2>Add to your to do to day list</h2>
         </div>

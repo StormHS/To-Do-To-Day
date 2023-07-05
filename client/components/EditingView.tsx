@@ -17,6 +17,7 @@ export default function EditingView({
   completed,
   onChange,
 }: Props) {
+
   const [form, setForm] = useState<TaskRecord>({ id, name, description, completed, })
 
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
@@ -25,7 +26,7 @@ export default function EditingView({
     setForm(newTask)
     onChange(newTask)
   }
-  
+
   return (
     <div>
       <ul key={id}>

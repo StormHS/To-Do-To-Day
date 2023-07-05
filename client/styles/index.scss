@@ -1,7 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;700&display=swap');
 @font-face {
     font-family: 'OpenDyslexicMono';
-    // src: url(OpenDyslexicMono-Regular.woff) format('woff');
     src: url(OpenDyslexicMono-Regular-2.otf) format('opentype');
 }
 
@@ -86,7 +85,7 @@ margin-bottom: 5%;
 }
 
 .listMargin {
-    margin-left: 20%;
+    margin-left: 30%;
 }
 
 .add-edit-button {
@@ -96,24 +95,26 @@ margin-bottom: 5%;
   font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     border: none;
     font-size: 20px;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
     background-color: blanchedalmond;
     border-radius: 50px;
+    cursor: pointer;
 }
 
 .nav-bar-buttons {
     font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-    text-decoration: none;
     margin-left: 50px;
     margin-right: 50px;
     font-size: 20px;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
 .save-button {
     margin-left: 35%;
     width: max-content;
+    cursor: pointer;
 }
 
 .sign-out-button {
@@ -124,5 +125,105 @@ margin-bottom: 5%;
     font-size: 20px;
     border: none;
     background-color: whitesmoke;
+    cursor: pointer;
 }
 
+.task-written {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    cursor: pointer;
+    background-color: whitesmoke;
+
+    ;
+}
+
+.delete-button {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    background-color: whitesmoke;
+    cursor: pointer;
+  
+}
+
+.in-line-flex {
+    display: flex;
+    flex-direction: row;
+}
+
+.notes {
+    background-color: rgb(251, 209, 130);
+    color: black;
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    border-radius: 50px;
+    font-size: 15px;
+    
+
+}
+input[type="checkbox"] {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+
+
+.checkbox {
+border: 2px solid black;
+background-color: rgb(243, 113, 14);
+
+}
+
+
+progress {
+    -webkit-appearance: none;
+}
+.progress-bar {
+    width: 30%;
+    margin-left: 35%;
+    margin-right: 35%;
+    height: 40px;
+    border: 6px ridge rgb(205, 144, 32);
+    margin-top: 150px;
+    // border: 5px solid black;
+
+}
+
+.progress-bar::-webkit-progress-value {
+background-color: rgb(243, 113, 14);
+}
+
+.progress-bar::-webkit-progress-bar {
+    background-color: blanchedalmond;    
+}
+
+
+.delete-all-button {
+    font-family: 'OpenDyslexicMono', 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 15px;
+    text-decoration: none;
+    color: black;
+    border: none;
+    background-color: whitesmoke;
+    margin-left: 40%;
+    margin-right: 40%;
+    width: 20%;
+    background-color: blanchedalmond;
+    border-radius: 50px;
+    cursor: pointer;
+
+}
+
+.undo-button {
+    cursor: pointer;
+}
