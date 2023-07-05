@@ -171,7 +171,7 @@ export default function AllTasks() {
                           }
                           position="bottom center"
                         >
-                          <p className="notes">Notes - {description}</p>
+                          <p className="notes">{description}</p>
                         </Popup>
                       </h2>
                       <button

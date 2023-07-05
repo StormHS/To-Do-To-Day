@@ -28,11 +28,13 @@
     "@auth0/auth0-react": "^1.12.0",
     "@fortawesome/free-solid-svg-icons": "^6.4.0",
     "@fortawesome/react-fontawesome": "^0.2.0",
+    "confetti-js": "^0.0.18",
     "express": "^4.17.2",
     "express-jwt": "^7.7.5",
     "express-jwt-authz": "^2.4.1",
     "jwks-rsa": "^2.1.5",
     "knex": "^2.3.0",
+    "react-confetti": "^6.1.0",
     "reactjs-popup": "^2.0.5",
     "sqlite3": "^5.1.2",
     "superagent": "7.1.1"
