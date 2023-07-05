@@ -9,6 +9,7 @@ import EditingView from './EditingView'
 import { TaskRecord } from '../../models/task'
 import Popup from 'reactjs-popup'
 import ProgressBar from './ProgressBar'
+import imgUrl from '../images/companion.png'
 
 export default function AllTasks() {
   const auth = useAuth0()
@@ -120,11 +121,7 @@ export default function AllTasks() {
         <h1>To Do To Day</h1>
         <div className="container container-list">
           <div className="img-container img-container-list">
-            <img
-              className="imgFlex"
-              src="../../images/companion.png"
-              alt="Little animal"
-            />
+            <img className="imgFlex" src={imgUrl} alt="Little animal" />
           </div>
           <TodoTodayListPopUp />
           <div>
@@ -174,7 +171,7 @@ export default function AllTasks() {
                           }
                           position="bottom center"
                         >
-                          <p className="notes">Notes - {description}</p>
+                          <p className="notes">{description}</p>
                         </Popup>
                       </h2>
                       <button

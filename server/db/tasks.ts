@@ -1,15 +1,13 @@
 import connection from './connection'
 import { TaskRecord, TaskData } from '../../models/task'
-import db from './connection'
 
-export function getAllTasks(
+export async function getAllTasks(
   auth0id: string,
   db = connection
 ): Promise<TaskRecord[]> {
   return db('taskListDay').select().where('auth0id', auth0id)
 }
 
-// hello!
 export async function moveCompletedTask(
   id: number,
   completed: boolean,
@@ -22,21 +20,22 @@ export async function moveCompletedTask(
   return task
 }
 
-export async function addTask(newTask: TaskData): Promise<TaskRecord[]> {
+export async function addTask(newTask: TaskData, db = connection): Promise<TaskRecord[]> {
   return await db<TaskRecord>('taskListDay').insert(newTask).returning('*')
 }
 
-export async function getTaskById(id: number): Promise<TaskRecord> {
+export async function getTaskById(id: number, db = connection): Promise<TaskRecord> {
   return await db('taskListDay').where('id', id).select('*').first()
 }
 
-export async function deleteTask(id: number, auth0id: string): Promise<void> {
+export async function deleteTask(id: number, auth0id: string, db = connection): Promise<void> {
   await db('taskListDay').where({ id, auth0id }).delete()
 }
 
 export async function editTask(
   task: TaskRecord,
-  id: number
+  id: number,
+  db = connection
 ): Promise<TaskRecord | undefined> {
   return db('taskListDay').where({ id }).update(task).returning('id')
 }

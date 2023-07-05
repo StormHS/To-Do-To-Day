@@ -1,5 +1,6 @@
 import { IfAuthenticated, IfNotAuthenticated } from './Authenticated'
 import { useAuth0 } from '@auth0/auth0-react'
+import imgUrl from '../images/companion.png'
 
 function Home() {
   const { user, logout, loginWithRedirect } = useAuth0()
@@ -19,7 +20,7 @@ function Home() {
         <div>
           <img
             className="companion-img-home"
-            src="../../images/companion.png"
+            src={imgUrl}
             alt="Little animal"
           />
         </div>
