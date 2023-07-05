@@ -8,7 +8,6 @@ export async function getAllTasks(
   return db('taskListDay').select().where('auth0id', auth0id)
 }
 
-// hello!
 export async function moveCompletedTask(
   id: number,
   completed: boolean,

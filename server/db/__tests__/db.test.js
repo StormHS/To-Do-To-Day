@@ -1,6 +1,6 @@
 import { beforeAll, beforeEach, afterAll, expect, describe, it } from 'vitest'
-import connection from './connection'
-import * as db from './tasks'
+import connection from '../connection'
+import * as db from '../tasks'
 
 beforeAll(() => {                                                                                                                                                                                                                                               
   return connection.migrate.latest()
@@ -51,5 +51,32 @@ describe('addTask', () => {
         "name": "test",
       }
     `)
+  })
+})
+
+describe('moveCompletedTask', () => {
+  it('should update the completion status of a task', async () => {
+    const id = 1
+    const completed = true
+
+    const task = await db.moveCompletedTask(id, completed, connection);
+    
+    expect(task.completed).toBeTruthy()
+    expect(task.id).toBe(id);
+    expect(Boolean(task.completed)).toEqual(completed);
+  })
+})
+
+describe('deleteTask', () => {
+  it('should delete a task from the database', async () => {
+    const id = 1
+    const auth0id = auth0Id
+    const tasks = await db.getAllTasks(auth0id, connection)
+   
+    await db.deleteTask(id, auth0id, connection)
+
+    const updatedList = await db.getAllTasks(auth0id, connection)
+    
+    expect(updatedList.length).toBe(tasks.length -1)
   })
 })
