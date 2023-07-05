@@ -17,7 +17,7 @@ router.get('/', checkJwt, async (req: JwtRequest, res) => {
 
     res.json({ tasks })
   } catch (error) {
-    console.log(error)
+    console.error(error)
     res.status(500).json({ message: 'Something went wrong' })
   }
 })
