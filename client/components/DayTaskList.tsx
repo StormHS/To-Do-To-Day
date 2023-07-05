@@ -136,56 +136,60 @@ export default function AllTasks() {
             </span>
           </div>
           <ul className="listFlex listMargin">
-            {incompleteTasks.map(({ id, name, description, completed, auth0id }) => {
-              return (
-                <div key={id}>
-                  {editing ? (
-                    <EditingView
-                      id={id}
-                      name={name}
-                      description={description}
-                      completed={completed}
-                      auth0id={auth0id}
-                      onUpdateComplete={() => setEditing(false)}
-                      onChange={onEditingViewChange}
-                    />
-                  ) : (
-                    <li
-                      className="in-line-flex"
-                      key={id}
-                      style={{ listStyleType: 'none' }}
-                    >
-                      <label style={{ display: 'flex', alignItems: 'center' }}>
-                        <input
-                          type="checkbox"
-                          className="checkbox"
-                          style={{ marginRight: '0.5rem' }}
-                          checked={completed}
-                          onChange={() => handleTaskComplete(id)}
-                        />
-                      </label>
-                      <h2>
-                        {' '}
-                        <Popup
-                          trigger={
-                            <button className="task-written">{name}</button>
-                          }
-                          position="bottom center"
-                        >
-                          <p className="notes">{description}</p>
-                        </Popup>
-                      </h2>
-                      <button
-                        className="delete-button"
-                        onClick={() => handleDeleteClick(id)}
+            {incompleteTasks.map(
+              ({ id, name, description, completed, auth0id }) => {
+                return (
+                  <div key={id}>
+                    {editing ? (
+                      <EditingView
+                        id={id}
+                        name={name}
+                        description={description}
+                        completed={completed}
+                        auth0id={auth0id}
+                        onUpdateComplete={() => setEditing(false)}
+                        onChange={onEditingViewChange}
+                      />
+                    ) : (
+                      <li
+                        className="in-line-flex"
+                        key={id}
+                        style={{ listStyleType: 'none' }}
                       >
-                        x
-                      </button>
-                    </li>
-                  )}
-                </div>
-              )
-            })}
+                        <label
+                          style={{ display: 'flex', alignItems: 'center' }}
+                        >
+                          <input
+                            type="checkbox"
+                            className="checkbox"
+                            style={{ marginRight: '0.5rem' }}
+                            checked={completed}
+                            onChange={() => handleTaskComplete(id)}
+                          />
+                        </label>
+                        <h2>
+                          {' '}
+                          <Popup
+                            trigger={
+                              <button className="task-written">{name}</button>
+                            }
+                            position="bottom center"
+                          >
+                            <p className="notes">{description}</p>
+                          </Popup>
+                        </h2>
+                        <button
+                          className="delete-button"
+                          onClick={() => handleDeleteClick(id)}
+                        >
+                          x
+                        </button>
+                      </li>
+                    )}
+                  </div>
+                )
+              }
+            )}
           </ul>
           {editing && (
             <button onClick={handleSave} className="save-button">
