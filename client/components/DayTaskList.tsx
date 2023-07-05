@@ -136,7 +136,7 @@ export default function AllTasks() {
             </span>
           </div>
           <ul className="listFlex listMargin">
-            {incompleteTasks.map(({ id, name, description, completed }) => {
+            {incompleteTasks.map(({ id, name, description, completed, auth0id }) => {
               return (
                 <div key={id}>
                   {editing ? (
@@ -145,6 +145,7 @@ export default function AllTasks() {
                       name={name}
                       description={description}
                       completed={completed}
+                      auth0id={auth0id}
                       onUpdateComplete={() => setEditing(false)}
                       onChange={onEditingViewChange}
                     />
