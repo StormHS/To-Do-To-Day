@@ -65,3 +65,24 @@ describe('GET/api/v1/tasks', () => {
     expect(response.body.message).toEqual('Something went wrong')
   })
 })
+
+describe('GET /api/v1/tasks/:id', () => {
+  beforeEach(() => {
+    vi.mocked(checkJwt).mockImplementation((req, res, next) => {
+      req.auth = {
+        header: {},
+        token: '',
+        sub: 'auth0|1234'
+      }
+      next()
+    })
+  })
+
+  it('should return a task with a matching id', async () => {
+    const id = 1
+    const mockTask = {
+      id: id,
+      
+    }
+  })
+} )
